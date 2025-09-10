@@ -1,0 +1,67 @@
+<html><head><title>apache/incubator-gluten Summary (2025-09-03 to 2025-09-10)</title></head><body><html>
+<head>
+<title>apache/incubator-gluten Summary (2025-09-03 to 2025-09-10)</title>
+</head>
+<body>
+<h1>Overall Summary</h1>
+<p><b>Generated Summary:</b> 
+Between 2025-09-03 and 2025-09-10, the apache/incubator-gluten repository showed active development focusing on Velox backend updates, bug fixes, and feature enhancements. Key improvements include sharing common shim classes across Spark versions, optimization of window functions to streaming windows, memory optimization by deferring Protobuf serialization, and usability improvements for GlutenUIUtils. Upstream Velox version updates were frequently integrated, and support for Flink functions such as split_index and processing time for queries was added. The period also saw infrastructure updates, build fixes, and documentation refinements. Overall, the development period focused on performance optimization, feature completeness, and build stability.
+</p>
+<ul>
+  <li>Total commits: 35</li>
+  <li>Number of PRs created/updated: 27</li>
+  <li>Number of bugs reported: 2</li>
+  <li>Count per commits type (bug fix, feature, improvement, etc.):
+    <ul>
+      <li>Bug Fix: 2 (e.g., Fix NumberFormatException in WindowFunctionNode, fix file INSTALL permissions)</li>
+      <li>Feature: 6 (e.g., Support function split_index and timestamp_seconds, Add RewriteCreateTableAsSelect for spark34)</li>
+      <li>Improvement: 7 (e.g., Simplify StrictRule, improve uiEnabled, avoid repeated calls to identifyBatchType)</li>
+      <li>Build/CI: 7 (e.g., Daily Update Velox Version, Fix Spark-355 download in GHA)</li>
+      <li>Documentation: 2 (e.g., Add experimental config section to doc, Reclassify internal/public configs)</li>
+      <li>Tooling/Infra: 2 (e.g., Support generating DV-enabled TPC-DS Delta table in gluten-it)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Important Bug Fixes</h2>
+<ul>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10644">NumberFormatException in WindowFunctionNode.setBound()</a>: Fixed a NumberFormatException that occurred when converting a double bound value to long in WindowFunctionNode.setBound to prevent failure in window functions.</li>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10638">[GLUTEN-10635][VL] bugfix: file INSTALL cannot set permissions</a>: Corrected file permission settings issue during build file installation process to ensure proper build behavior.</li>
+</ul>
+
+<h2>New Features</h2>
+<ul>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10057">[GLUTEN-10056][FLINK] Support function split_index</a>: Added support for the split_index function in the Flink backend enabling string splitting operations.</li>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10661">[VL] Support Velox's preferred_output_batch_bytes config</a>: Added support for Velox configuration to control output batch byte size to help prevent out-of-memory errors with wide rows.</li>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10646">[GLUTEN-10625][CORE] Add RewriteCreateTableAsSelect for spark34</a>: Added support for RewriteCreateTableAsSelect to enable DSv2 Column Write on Spark 3.4.</li>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10285">[GLUTEN-9366][VL] Support Iceberg functions</a>: Supported the bucket function in Iceberg; other functions fallback for now.</li>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10630">[GLUTEN-10630][FLINK] Support processing time for q12</a>: Added support for processing time attribute in Nexmark query 12 on Flink backend.</li>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10475">[GLUTEN-10472][VL] feat: Support columnar partial generate for HiveUDTF</a>: Enabled columnar partial generate to optimize Hive UDTF processing and improve performance.</li>
+</ul>
+
+<h2>Improvements</h2>
+<ul>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10553">[GLUTEN-10559] Simplify StrictRule and remove unnecessary DummyLeafExec</a>: Simplified the StrictRule logic improving Spark driver performance by reducing extra plan nodes.</li>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10649">[GLUTEN-10649] Avoid repeated calls to identifiyBatchType</a>: Reduced repeated calls to identifyBatchType method improving performance.</li>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10667">[GLUTEN-10666][VL]Optimize sort window to streaming window if child order matchs</a>: Optimized sort window to convert to streaming window when child order is already satisfied.</li>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10664">Remove unnecessary glutenUiEnabled</a>: Removed redundant glutenUiEnabled variable improving code clarity.</li>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10657">[GLUTEN-10664] Improve uiEnabled for GlutenUIUtils</a>: Improved the uiEnabled method with short-circuit logic for better efficiency.</li>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10662">[CORE] Defer Protobuf serialization of SplitInfos in GlutenPartitions</a>: Deferred Protobuf serialization to task execution to reduce driver memory usage.</li>
+  <li><a href="https://github.com/apache/incubator-gluten/pull/10659">[GLUTEN-10613][VL] Add `experimental` method to ConfigBuilder and add experimental config section to doc</a>: Added experimental API to ConfigBuilder with related documentation sections for clarity.</li>
+</ul>
+
+<h2>Top Contributors</h2>
+<ul>
+  <li><a href="https://github.com/zhztheplayer">zhztheplayer</a></li>
+  <li><a href="https://github.com/GlutenPerfBot">GlutenPerfBot</a></li>
+  <li><a href="https://github.com/PHILO-HE">PHILO-HE</a></li>
+  <li><a href="https://github.com/marin-ma">marin-ma</a></li>
+  <li><a href="https://github.com/rui-mo">rui-mo</a></li>
+  <li><a href="https://github.com/zhouyuan">zhouyuan</a></li>
+  <li><a href="https://github.com/taiyang-li">taiyang-li</a></li>
+  <li><a href="https://github.com/Yohahaha">Yohahaha</a></li>
+  <li><a href="https://github.com/zzcclp">zzcclp</a></li>
+  <li><a href="https://github.com/JkSelf">JkSelf</a></li>
+</ul>
+</body>
+</html></body></html>

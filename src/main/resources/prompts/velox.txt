@@ -1,0 +1,43 @@
+Generate an HTML report for the repository covering the period from {startDate} to {endDate}. The report should include:
+
+<html>
+<head>
+<title>{repoName} Summary ({startDate} to {endDate})</title>
+</head>
+<body>
+<h1>Overall Summary</h1>
+<p><b>Generated Summary:</b> This section should provide a concise description of the repository's activity and highlights for the period.</p>
+<ul>
+  <li>Total commits: [number]</li>
+  <li>Number of PRs created/updated: [number]</li>
+  <li>Number of bugs reported: [number]</li>
+  <li>Count per commits type (bug fix, feature, improvement, etc.): [list, inferred from PR titles]</li>
+</ul>
+
+<h2>Important Bug Fixes</h2>
+<ul>
+  <li><a href="[bug-fix-PR-link]">[bug-fix-PR-title]</a>: [1-2 line summary of the bug fix]</li>
+  <!-- more bug fixes -->
+</ul>
+
+<h2>New Features</h2>
+<ul>
+  <li><a href="[feature-PR-link]">[feature-PR-title]</a>: [1-2 line summary of the feature]</li>
+  <!-- more features -->
+</ul>
+
+<h2>Improvements</h2>
+<ul>
+  <li><a href="[improvement-PR-link]">[improvement-PR-title]</a>: [1-2 line summary of the improvement]</li>
+  <!-- more improvements -->
+</ul>
+
+<h2>Top Contributors</h2>
+<ul>
+  <li><a href="[contributor-profile-link]">[contributor-name]</a></li>
+  <!-- more contributors -->
+</ul>
+</body>
+</html>
+
+For each PR, commit, and issue, include a clickable link to the original item. Format all sections clearly, and ensure all references are clickable links to the original GitHub items.
