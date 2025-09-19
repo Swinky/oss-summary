@@ -1,20 +1,37 @@
 package org.microsoft;
 
+import org.microsoft.github.service.GitHubService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+/**
+ * Main entry point for the OSS Summary application.
+ * This application generates comprehensive reports for GitHub repositories,
+ * including commit analysis, pull request summaries, and issue tracking.
+ */
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) {
         try {
+            logger.info("Starting OSS Summary application");
             ConfigLoader configLoader = new ConfigLoader("src/main/resources/config.properties");
 
             String githubToken = System.getenv("GITHUB_TOKEN");
             if (githubToken == null || githubToken.isEmpty()) {
                 githubToken = configLoader.getGithubToken();
+                logger.debug("Using GitHub token from configuration file");
+            } else {
+                logger.debug("Using GitHub token from environment variable");
             }
 
-            GitHubDataFetcher fetcher = new GitHubDataFetcher(githubToken);
+            if (githubToken == null || githubToken.isEmpty()) {
+                logger.error("GitHub token not found in environment or configuration");
+                System.exit(1);
+            }
+
+            GitHubService githubService = new GitHubService(githubToken);
 
             AzureFoundryAgentClient agentClient = new AzureFoundryAgentClient(
                 configLoader.getAzureAgentEndpoint(),
@@ -22,12 +39,16 @@ public class Main {
                 configLoader.getAzureAgentId()
             );
 
-            SummaryGeneratorOrchestrator app = new SummaryGeneratorOrchestrator(configLoader, fetcher, agentClient);
+            SummaryGeneratorOrchestrator app = new SummaryGeneratorOrchestrator(configLoader, githubService, agentClient);
             app.run(args);
 
+            logger.info("OSS Summary application completed successfully");
         } catch (IOException e) {
-            System.err.println("Error initializing application: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Error initializing application: {}", e.getMessage(), e);
+            System.exit(1);
+        } catch (Exception e) {
+            logger.error("Unexpected error occurred: {}", e.getMessage(), e);
+            System.exit(1);
         }
     }
 }

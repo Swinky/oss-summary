@@ -1,92 +1,286 @@
 # OSS Summary Generator
 
-A Java application that fetches data from GitHub repositories and generates rich, structured HTML summary reports using Azure OpenAI. The reports include overall activity, bug fixes, new features, improvements, and top contributors, with clickable links to original GitHub items.
+A comprehensive Java application that fetches data from GitHub repositories and generates rich, AI-powered HTML summary reports using Azure OpenAI. The application provides detailed insights into repository activity including commits, pull requests, issues, and team contributions.
 
-## Features
+## 🚀 Features
 
-- Fetches commits, pull requests, issues, and contributors from specified GitHub repositories.
-- Uses Azure OpenAI to generate detailed HTML reports.
-- Customizable prompt templates per repository.
-- Configurable output directory for generated reports.
-- Each report includes:
-  - Overall summary (with generated summary paragraph)
-  - Important bug fixes (with 1-2 line summaries)
-  - New features (with 1-2 line summaries)
-  - Improvements (with 1-2 line summaries)
-  - Top contributors (with profile links)
-  - Clickable links to all referenced PRs, commits, and issues
-- High-level progress and timing logs for each step.
+### Core Functionality
+- **Multi-Repository Support**: Process multiple GitHub repositories in a single run
+- **AI-Powered Analysis**: Uses Azure OpenAI for intelligent commit categorization and summary generation
+- **Rich HTML Reports**: Generates structured, styled HTML reports with clickable GitHub links
+- **Bot Filtering**: Automatically filters out bot activity for cleaner reports
+- **Flexible Date Ranges**: Configure any date period for analysis (not just weekly)
 
-## Prerequisites
+### Report Sections
+1. **Overall Summary** - AI-generated high-level activity summary with key metrics
+2. **Microsoft Team Activity** - Dedicated section for Microsoft team contributions
+3. **Commits by Category** - AI-categorized commits:
+   - Important Bug Fixes
+   - New Features  
+   - Improvements
+   - Others
+4. **Open Pull Requests** - All currently open PRs with links
+5. **New Open Issues** - Recently reported issues that are still open
 
-- Java 17+
-- Maven
-- Azure OpenAI API key and deployment
-- GitHub API token (optional, can be set in config or via environment variable)
+### Advanced Features
+- **Parallel Processing**: Concurrent AI analysis for improved performance
+- **Robust Error Handling**: Comprehensive logging and error recovery
+- **Configurable Prompts**: Customizable AI prompts per repository
+- **Team Detection**: Automatic identification of Microsoft team members
+- **HTML Escaping**: Secure handling of special characters in content
 
-## Build Instructions
+## 📋 Prerequisites
 
-```sh
-mvn clean install
+- **Java 17+**
+- **Maven 3.6+**
+- **Azure OpenAI API** - Endpoint, API key, and deployment ID
+- **GitHub Token** - Personal access token for GitHub API access
+- **Network Access** - To GitHub API and Azure OpenAI endpoints
+
+## 🛠️ Build Instructions
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd oss-summary
+
+# Build the project
+mvn clean compile
+
+# Run tests
+mvn test
+
+# Package the application
+mvn package
 ```
 
-## Run Instructions
+This creates `target/oss-summary-1.0-SNAPSHOT.jar`
 
-After building, run the application using the generated JAR:
+## ⚙️ Configuration
 
-```sh
+### Required Configuration File
+Create or edit `src/main/resources/config.properties`:
+
+```properties
+# Date Range Configuration
+summary.period=7
+summary.endDate=2024-01-07
+
+# Repository Configuration  
+summary.repositories=apache/incubator-gluten,apache/spark,facebookincubator/velox
+
+# Microsoft Team Members (comma-separated GitHub usernames)
+summary.msteam=user1,user2,user3
+
+# Output Configuration
+output.dir=./output
+
+# GitHub API Configuration
+github.token=your_github_token_here
+
+# Azure OpenAI Configuration
+azure.agent.endpoint=https://your-endpoint.openai.azure.com/
+azure.agent.apiKey=your_api_key_here
+azure.agent.id=your_deployment_id
+```
+
+### Environment Variables (Optional)
+You can override configuration using environment variables:
+- `GITHUB_TOKEN` - GitHub API token
+- `AZURE_OPENAI_API_KEY` - Azure OpenAI API key
+
+## 🚀 Usage
+
+### Basic Usage
+```bash
 java -jar target/oss-summary-1.0-SNAPSHOT.jar
 ```
 
-## Configuration
+### Command Line Arguments
+Override configuration via command line:
+```bash
+# Custom date range and repositories
+java -jar target/oss-summary-1.0-SNAPSHOT.jar --repositories apache/incubator-gluten,facebookincubator/velox --endDate 2025-09-19 --period 7
+```
 
-Edit `src/main/resources/config.properties` to set:
+### Output
+- HTML reports are generated in the configured output directory
+- Each repository gets its own HTML file (e.g., `apache-spark.html`)
+- Reports include embedded CSS for standalone viewing
 
-- `summary.period` - Number of days for the summary period
-- `summary.endDate` - End date for the summary (YYYY-MM-DD)
-- `summary.repositories` - Comma-separated list of repositories (e.g., `apache/incubator-gluten,facebook/velox`)
-- `output.dir` - Output directory for HTML reports
-- `github.token` - GitHub API token (optional, can be set via environment variable)
-- `azure.agent.endpoint`, `azure.agent.apiKey`, `azure.agent.id` - Azure OpenAI configuration
+## 🏗️ Architecture
 
-## Prompt Templates
+### Core Components
 
-Customizable per repository. Place prompt files in `src/main/resources/prompts/` (e.g., `incubator-gluten.txt`, `velox.txt`, or `apache/incubator-gluten.txt`).
-Prompts instruct the agent to generate HTML reports with the required structure and summaries.
+#### 1. Main Application Flow
+- **`Main.java`** - Application entry point and initialization
+- **`SummaryGeneratorOrchestrator.java`** - Orchestrates the complete workflow
+- **`ConfigLoader.java`** - Handles configuration loading and validation
 
-## Output
+#### 2. GitHub Integration
+- **`GitHubService.java`** - GitHub API client for fetching repository data
+- **`RepositoryData.java`** - Data model for repository information
+- **Data Models**: `Commit`, `PullRequest`, `Issue`, `Contributor`
 
-- HTML reports are generated in the configured output directory (default: `output/`).
-- Each file is named after the repository (e.g., `apache-incubator-gluten.html`).
-- Reports include all required sections and clickable links.
+#### 3. AI Analysis Engine
+- **`ReportService.java`** - Main report generation service
+- **`AzureAiAnalysisService.java`** - Azure OpenAI integration
+- **`ParallelCommitSummaryService.java`** - Concurrent commit analysis
+- **`CommitCategorization.java`** - Commit categorization results
 
-## Logging
+#### 4. Report Generation
+- **`HtmlReportGenerator.java`** - HTML report rendering
+- **`BotFilter.java`** - Bot activity filtering utilities
 
-- Console logs show progress and time taken for each major step (fetching data, generating summaries, writing files).
+### Data Flow
+1. **Configuration Loading** → Load settings and validate API credentials
+2. **Data Fetching** → Retrieve commits, PRs, issues from GitHub API
+3. **Bot Filtering** → Remove automated bot activity
+4. **AI Analysis** → Categorize commits and generate summaries
+5. **HTML Generation** → Create styled HTML reports
+6. **File Output** → Save reports to configured directory
 
-## Testing
+## 🔧 Development
 
-Run tests with Maven:
+### Project Structure
+```
+src/
+├── main/
+│   ├── java/
+│   │   └── org/microsoft/
+│   │       ├── Main.java                    # Application entry point
+│   │       ├── ConfigLoader.java            # Configuration management
+│   │       ├── SummaryGeneratorOrchestrator.java # Main workflow
+│   │       ├── analysis/                    # AI analysis components
+│   │       ├── github/                      # GitHub API integration
+│   │       ├── report/                      # Report generation
+│   │       └── utils/                       # Utility classes
+│   └── resources/
+│       ├── config.properties               # Main configuration
+│       └── logback.xml                     # Logging configuration
+└── test/
+    └── java/                              # Unit and integration tests
+```
 
-```sh
+### Key Dependencies
+- **GitHub API**: `org.kohsuke:github-api`
+- **HTTP Client**: `com.squareup.okhttp3:okhttp`
+- **JSON Processing**: `com.fasterxml.jackson`
+- **Logging**: `ch.qos.logback:logback-classic`
+- **Testing**: `org.junit.jupiter`, `org.mockito`
+
+## 🧪 Testing
+
+### Run All Tests
+```bash
 mvn test
 ```
 
-Unit tests cover orchestrator logic, HTML output, error handling, and configuration.
+### Test Categories
+- **Unit Tests**: Individual component testing
+- **Integration Tests**: GitHub API and Azure OpenAI integration
+- **Service Tests**: End-to-end workflow testing
 
-## Example Usage
+### Test Reports
+Test results are available in `target/surefire-reports/`
 
-1. Configure `config.properties` and prompt templates.
-2. Build and run the application.
-3. Find HTML reports in the output directory.
+## 📊 Monitoring and Logging
 
-## Contributing
+### Logging Configuration
+- Logs are configured via `src/main/resources/logback.xml`
+- Default log level: INFO
+- Console and file output supported
 
-- Fork the repository and create a feature branch.
-- Submit pull requests with clear descriptions.
-- Ensure all tests pass before submitting.
+### Performance Metrics
+The application logs timing information for:
+- GitHub data fetching
+- AI analysis operations
+- HTML report generation
+- Overall processing time
 
-## License
+### Debug Mode
+Enable detailed logging:
+```bash
+java -Dlogging.level.org.microsoft=DEBUG -jar target/oss-summary-1.0-SNAPSHOT.jar
+```
 
-MIT License (or specify your license here).
+## 🔒 Security Considerations
 
+- **API Keys**: Store sensitive credentials in environment variables
+- **GitHub Token**: Use tokens with minimal required permissions
+- **HTML Escaping**: All user content is escaped to prevent XSS
+- **Input Validation**: Repository names and dates are validated
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Code Style
+- Follow Java conventions
+- Add comprehensive tests for new features
+- Update documentation for API changes
+- Use meaningful commit messages
+
+## 📈 Performance Tuning
+
+### AI Service Configuration
+```properties
+# Parallel processing threads
+ai.summary.threads=4
+
+# Request timeouts
+ai.summary.timeout=30
+
+# Token limits
+ai.categorization.maxTokens=2000
+ai.summary.maxTokens=500
+ai.commitSummary.maxTokens=120
+```
+
+### GitHub API Optimization
+- Uses efficient pagination for large repositories
+- Implements request rate limiting
+- Caches frequently accessed data
+
+## ❗ Troubleshooting
+
+### Common Issues
+
+**GitHub API Rate Limiting**
+```
+Error: GitHub API rate limit exceeded
+Solution: Use authenticated token or wait for rate limit reset
+```
+
+**Azure OpenAI Connection Issues**
+```
+Error: Failed to connect to Azure OpenAI
+Solution: Verify endpoint URL, API key, and deployment ID
+```
+
+**Memory Issues with Large Repositories**
+```
+Error: OutOfMemoryError
+Solution: Increase JVM heap size: java -Xmx4g -jar ...
+```
+
+### Debug Information
+Enable debug logging to troubleshoot issues:
+```bash
+java -Dlogging.level.root=DEBUG -jar target/oss-summary-1.0-SNAPSHOT.jar
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- GitHub API for repository data access
+- Azure OpenAI for intelligent content analysis
+- Apache Maven for build management
+- JUnit and Mockito for testing framework

@@ -18,13 +18,7 @@ class PullRequestTest {
         p1.setMergedAt(null);
         p1.setAuthorLogin("user1");
         p1.setAssignees(List.of("user2"));
-        p1.setLabels(List.of("enhancement"));
-        p1.setComments(2);
         p1.setBody("Body");
-        p1.setCommits(3);
-        p1.setAdditions(10);
-        p1.setDeletions(5);
-        p1.setChangedFiles(2);
 
         PullRequest p2 = new PullRequest();
         p2.setId(1L);
@@ -37,13 +31,7 @@ class PullRequestTest {
         p2.setMergedAt(null);
         p2.setAuthorLogin("user1");
         p2.setAssignees(List.of("user2"));
-        p2.setLabels(List.of("enhancement"));
-        p2.setComments(2);
         p2.setBody("Body");
-        p2.setCommits(3);
-        p2.setAdditions(10);
-        p2.setDeletions(5);
-        p2.setChangedFiles(2);
 
         assertEquals(p1, p2);
         assertEquals(p1.hashCode(), p2.hashCode());

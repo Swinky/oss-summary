@@ -1,67 +1,118 @@
-<html><head><title>apache/incubator-gluten Summary (2025-09-03 to 2025-09-10)</title></head><body><html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>apache/incubator-gluten Summary (2025-09-03 to 2025-09-10)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSS Summary Report - apache/incubator-gluten</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+h1 { color: #0366d6; border-bottom: 3px solid #0366d6; padding-bottom: 10px; margin-bottom: 30px; }
+h2 { color: #24292e; border-bottom: 1px solid #e1e4e8; padding-bottom: 8px; margin-top: 30px; margin-bottom: 15px; }
+h3 { color: #586069; margin-top: 20px; margin-bottom: 8px; }
+/* Plain commit list (ordered) */
+.commit-list { margin: 0 0 12px 1.5em; padding: 0; }
+.commit-list.empty { margin-left: 0; }
+.commit-list.empty > li { list-style: none; padding: 2px 0; color: #6a737d; font-style: italic; }
+a { color: #0366d6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+em { color: #6a737d; font-style: italic; }
+</style>
 </head>
 <body>
-<h1>Overall Summary</h1>
-<p><b>Generated Summary:</b> 
-Between 2025-09-03 and 2025-09-10, the apache/incubator-gluten repository showed active development focusing on Velox backend updates, bug fixes, and feature enhancements. Key improvements include sharing common shim classes across Spark versions, optimization of window functions to streaming windows, memory optimization by deferring Protobuf serialization, and usability improvements for GlutenUIUtils. Upstream Velox version updates were frequently integrated, and support for Flink functions such as split_index and processing time for queries was added. The period also saw infrastructure updates, build fixes, and documentation refinements. Overall, the development period focused on performance optimization, feature completeness, and build stability.
-</p>
+<h1>apache/incubator-gluten OSS Updates (2025-09-02 to 2025-09-09)</h1>
+<h2>Overall Summary</h2>
+<p>During the week of September 2 to September 9, 2025, the apache/incubator-gluten repository saw active development with 25 commits, highlighting a strong focus on improvements and new features, which together accounted for 15 updates. Additionally, the team addressed 4 bug fixes and managed 2 pull requests, while also responding to 6 new issues, indicating ongoing efforts to enhance functionality and maintain stability.</p>
+<div style="flex: 1;">
 <ul>
-  <li>Total commits: 35</li>
-  <li>Number of PRs created/updated: 27</li>
-  <li>Number of bugs reported: 2</li>
-  <li>Count per commits type (bug fix, feature, improvement, etc.):
-    <ul>
-      <li>Bug Fix: 2 (e.g., Fix NumberFormatException in WindowFunctionNode, fix file INSTALL permissions)</li>
-      <li>Feature: 6 (e.g., Support function split_index and timestamp_seconds, Add RewriteCreateTableAsSelect for spark34)</li>
-      <li>Improvement: 7 (e.g., Simplify StrictRule, improve uiEnabled, avoid repeated calls to identifyBatchType)</li>
-      <li>Build/CI: 7 (e.g., Daily Update Velox Version, Fix Spark-355 download in GHA)</li>
-      <li>Documentation: 2 (e.g., Add experimental config section to doc, Reclassify internal/public configs)</li>
-      <li>Tooling/Infra: 2 (e.g., Support generating DV-enabled TPC-DS Delta table in gluten-it)</li>
-    </ul>
-  </li>
+<li><b>Total commits:</b> 25</li>
+<li><b>Number of PRs created/updated:</b> 2</li>
+<li><b>Number of issues reported:</b> 6</li>
+<li><b>Count per commit type:</b> Bug Fixes: 4, New Features: 6, Improvements: 9, Others: 6</li>
+<li><b>Total commits by Microsoft Team:</b> 0</li>
 </ul>
+</div>
+<hr>
+<h2>Microsoft Team Activity</h2>
+<h3>Pull Requests</h3>
+<ul>
+<li><em>No Microsoft team activity found for pull requests in this period.</em></li>
+</ul>
+<h3>Commits</h3>
+<ul>
+<li><em>No Microsoft team activity found for commits in this period.</em></li>
+</ul>
+<hr>
+<h2>Commits by Category</h2>
+<h3>Important Bug Fixes</h3>
+<ol class='commit-list'>
+<li><a href="https://github.com/apache/incubator-gluten/commit/7f3bc4f17240cdf1a41245641d743d84c6d6e4b8">[GLUTEN-10361][FLINK] Fix UT failure between the conversion of `BinaryRowData` and `StatefulRecord` ...</a> - by KevinyhZou<br>Fixed unit test failure in conversion between BinaryRowData and StatefulRecord. Updated test to use VectorSource and PrintSink for accuracy.<br><em>* fix ut by use VectorSource and PrintSink</em></li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/baaa782fb5533bbe7fe0da05ea322098241e5e3c">[GLUTEN-10635][VL] bugfix: file INSTALL cannot set permissions (#10638)</a> - by beliefer<br>Fixed build bug related to file INSTALL permissions. Issue #10635 resolved.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/41d2c602fe33d4f3465a1b7acf7efa8a159ef3a5">[VL] Fix Arrow URL typo (#10641)</a> - by liujiayi771<br>Fixed a typo in the Arrow URL. Improved download link accuracy.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/4542c08f21da3a7748129b3fc45b05f290734081">[GLUTEN-10607][MINOR] Fix: Use setSafe in DateWriter to avoid overflow (#10581)
 
-<h2>Important Bug Fixes</h2>
-<ul>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10644">NumberFormatException in WindowFunctionNode.setBound()</a>: Fixed a NumberFormatException that occurred when converting a double bound value to long in WindowFunctionNode.setBound to prevent failure in window functions.</li>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10638">[GLUTEN-10635][VL] bugfix: file INSTALL cannot set permissions</a>: Corrected file permission settings issue during build file installation process to ensure proper build behavior.</li>
-</ul>
+If the Date type is...</a> - by jiangjiangtian<br>Fixed overflow issue in DateWriter by using setSafe instead of set. Prevented exceptions when Date is nested in complex types.<br><em>If the Date type is nested within an Array, Map, or Struct, invoking writeRow may result in an exception due to DateWriter utilizing the unsafe set in...</em></li>
+</ol>
+<h3>Features</h3>
+<ol class='commit-list'>
+<li><a href="https://github.com/apache/incubator-gluten/commit/4b8da065e69966d8321058222e381378218728af">[VL] Support generating DV-enabled TPC-DS Delta table in gluten-it (#10639)</a> - by zhztheplayer<br>Added `data-gen-features` option in gluten-it for post table generation ops. Enabled DV and data deletion features for TPC-DS Delta table generation.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/1c33b26ba8af9cae3e1e1bcb91a2c3a57ecfd49d">[GLUTEN-9366][VL] Support Iceberg functions (#10285)
 
-<h2>New Features</h2>
-<ul>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10057">[GLUTEN-10056][FLINK] Support function split_index</a>: Added support for the split_index function in the Flink backend enabling string splitting operations.</li>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10661">[VL] Support Velox's preferred_output_batch_bytes config</a>: Added support for Velox configuration to control output batch byte size to help prevent out-of-memory errors with wide rows.</li>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10646">[GLUTEN-10625][CORE] Add RewriteCreateTableAsSelect for spark34</a>: Added support for RewriteCreateTableAsSelect to enable DSv2 Column Write on Spark 3.4.</li>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10285">[GLUTEN-9366][VL] Support Iceberg functions</a>: Supported the bucket function in Iceberg; other functions fallback for now.</li>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10630">[GLUTEN-10630][FLINK] Support processing time for q12</a>: Added support for processing time attribute in Nexmark query 12 on Flink backend.</li>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10475">[GLUTEN-10472][VL] feat: Support columnar partial generate for HiveUDTF</a>: Enabled columnar partial generate to optimize Hive UDTF processing and improve performance.</li>
-</ul>
+Only bucket function is supported, other funct...</a> - by jinchengchenghh<br>Supported only bucket function for Iceberg, others fallback. Full implementations are in facebookincubator/velox#14276.<br><em>Only bucket function is supported, other functions are fallback now, all the function implementation are in facebookincubator/velox#14276</em></li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/c988abb73d06ad5ce096a4abd7804f6f09f24979">[GLUTEN-10013][FLINK] Support function reinterpret (#10022)
 
-<h2>Improvements</h2>
-<ul>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10553">[GLUTEN-10559] Simplify StrictRule and remove unnecessary DummyLeafExec</a>: Simplified the StrictRule logic improving Spark driver performance by reducing extra plan nodes.</li>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10649">[GLUTEN-10649] Avoid repeated calls to identifiyBatchType</a>: Reduced repeated calls to identifyBatchType method improving performance.</li>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10667">[GLUTEN-10666][VL]Optimize sort window to streaming window if child order matchs</a>: Optimized sort window to convert to streaming window when child order is already satisfied.</li>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10664">Remove unnecessary glutenUiEnabled</a>: Removed redundant glutenUiEnabled variable improving code clarity.</li>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10657">[GLUTEN-10664] Improve uiEnabled for GlutenUIUtils</a>: Improved the uiEnabled method with short-circuit logic for better efficiency.</li>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10662">[CORE] Defer Protobuf serialization of SplitInfos in GlutenPartitions</a>: Deferred Protobuf serialization to task execution to reduce driver memory usage.</li>
-  <li><a href="https://github.com/apache/incubator-gluten/pull/10659">[GLUTEN-10613][VL] Add `experimental` method to ConfigBuilder and add experimental config section to doc</a>: Added experimental API to ConfigBuilder with related documentation sections for clarity.</li>
-</ul>
+* support reinterpret</a> - by KevinyhZou<br>Added support for the reinterpret function in GLUTEN. Implementation refers to Flink&#x27;s ScalarOperatorGens#generateReinterpret.<br><em>* support reinterpret</em></li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/4fdae714d9a986833d6917c3efb0c81b02ed8864">[GLUTEN-10566][VL] Add Spark unix_timestamp support with timestamp and format arguments (#10567)</a> - by nimesh1601<br>Added support for unix_timestamp and to_unix_timestamp with TIMESTAMP and VARCHAR args. Ignored format arguments to match Spark behavior.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/be9f4f6cc63aa7c6423b1a3c789740edabc0d09b">[GLUTEN-10546][FLINK] Support all flink operators for nexmark (#10548)
 
-<h2>Top Contributors</h2>
-<ul>
-  <li><a href="https://github.com/zhztheplayer">zhztheplayer</a></li>
-  <li><a href="https://github.com/GlutenPerfBot">GlutenPerfBot</a></li>
-  <li><a href="https://github.com/PHILO-HE">PHILO-HE</a></li>
-  <li><a href="https://github.com/marin-ma">marin-ma</a></li>
-  <li><a href="https://github.com/rui-mo">rui-mo</a></li>
-  <li><a href="https://github.com/zhouyuan">zhouyuan</a></li>
-  <li><a href="https://github.com/taiyang-li">taiyang-li</a></li>
-  <li><a href="https://github.com/Yohahaha">Yohahaha</a></li>
-  <li><a href="https://github.com/zzcclp">zzcclp</a></li>
-  <li><a href="https://github.com/JkSelf">JkSelf</a></li>
-</ul>
+* [GLUTEN-10546][FLINK] Supp...</a> - by shuai-xu<br>Supported all Flink operators for Nexmark tests including GroupAgg, Rank, and TopN. Added checkpoint interface support and passed Nexmark queries q18 to q21.<br><em>* [GLUTEN-10546][FLINK] Support all flink operators for nexmark</em></li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/3532b74af4c3d05db4e60306f207e9332c213abb">[Minor] Add enhanced features runtime config (#10608)
+
+User can compile with --enable_enhanced_featu...</a> - by jinchengchenghh<br>Added runtime config to enable or disable enhanced features. Default is false for flexibility in debug or performance.<br><em>User can compile with --enable_enhanced_features which is default false before, this config can be flexible for users to disable all the enhanced feat...</em></li>
+</ol>
+<h3>Improvements</h3>
+<ol class='commit-list'>
+<li><a href="https://github.com/apache/incubator-gluten/commit/11ae9a7a165e9e3f6e13ad5f67e1d9bd09003871">[GLUTEN-10544] Remove unnecessary method separateScanRDD (#10545)</a> - by beliefer<br>Removed the unnecessary method separateScanRDD to clean up the code. This change fixes issue #10544 and was verified by GA tests.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/5a031a3723c3c124536693c2daf8770eca456362">[GLUTEN-10450][VL] Reclassify internal/public configs and remove internal configs from doc (#10603)
+...</a> - by zjuwangg<br>Reclassified internal and public configurations in the project. Removed internal configs from the documentation.<br><em>Remove internal configurations from gluten doc as described (#10450)</em></li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/736e71b3611a861127b5cf7607772b071ea34bdc">[GLUTEN-10618][VL] Update input iterator metrics name to include more details (#10619)</a> - by marin-ma<br>Renamed input iterator metrics for better detail clarity. Improved metric naming in VL module.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/b7e44c210ab28636c29703462f26e0d4d2833770">[GLUTEN-10214][VL] Merge inputstream for shuffle reader (#10499)</a> - by marin-ma<br>Merged input streams in shuffle reader to optimize deserialization. Improved handling for Gluten&#x27;s columnar data format.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/b2fc18654c3b9c204a3fc8168e479363d5899f7d">[VL] Refactor gluten-it to pass structured query information to runner (#10623)</a> - by zhztheplayer<br>Refactored gluten-it to pass structured QuerySet to the runner. This change adds flexibility in handling queries before execution.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/84ac41874ce027ef66bc9f13881e1dfe105206c3">[GLUTEN-10605][VL] Rewrite unbounded window to an equivalent aggregate join (#10606)</a> - by zml1206<br>Rewrote unbounded window to an equivalent aggregate join to prevent OOM. This change optimizes memory use for large partitions in Velox.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/3fe42d1d0c479c107b3cd199850931ca5927f513">[GLUTEN-10570][FLINK] Add `--add-opens` options to MAVEN_OPTS for Java 17 compatibility (#10572)</a> - by KevinyhZou<br>Added `--add-opens` options to MAVEN_OPTS for Java 17 compatibility. This update ensures smoother builds with Java 17 in Flink projects.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/7f5fb2d8a98d1410072858244235363530868593">[GLUTEN-10577][CELEBORN] Refactor `CelebornShuffleManager` to load factory in a better way (#10591)</a> - by zjuwangg<br>Refactored CelebornShuffleManager to use a list instead of a map for factory loading. Existing tests were used to verify the changes.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/d4bad42de30eba2e53b1d02c6386df62e2f3f8ce">[GLUTEN-9335][VL] Support iceberg partition write (#10497)
+
+Add Protobuf struct IcebergPartitionFiel...</a> - by jinchengchenghh<br>Added Protobuf structs to transfer Iceberg partition ID and spec info. Fixed IcebergWriteTest build and set file format to ORC for TPCH.<br><em>Add Protobuf struct IcebergPartitionField to transfer the iceberg id information, add IcebergPartitionSpec to transfer partition information.
+Build wi...</em></li>
+</ol>
+<h3>Others</h3>
+<ol class='commit-list'>
+<li><a href="https://github.com/apache/incubator-gluten/commit/0515a6bff714f74dbf29b40f431ba83579aff87c">[GLUTEN-8889][VL] Remove Spark 3.5.5 resource setup from GHA workflow (#10655)</a> - by zhouyuan<br>Removed Spark 3.5.5 resource setup from GitHub Actions workflow. This update cleans up the VL project CI configuration.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/e1b569b9ed05edd0a739b9c7d0c95b59880de331">[MINOR] Add .java-version to .gitignore (#10642)</a> - by Zouxxyy<br>Added .java-version file to the .gitignore list. This prevents committing local Java version settings.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/d41c78983d3c64b556686b446d1e70d8a6300311">[GLUTEN-10210][VL] Enable tpcds tests for Spark-400 in CI (#10633)
+
+This patch enabled TPCDS tests f...</a> - by zhouyuan<br>Enabled TPCDS tests for Spark-400 in CI. Updated Ubuntu repo to default source.<br><em>This patch enabled TPCDS tests for Spark-400.
+This patch also updated the Ubuntu repo to the default one
+fixes: #10210
+
+---------
+
+Signed-off-by: Yuan...</em></li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/ee8e936c0812b187d14f355177831ab5e167d647">[VL][MINOR] Remove duplicate include of VELOX_BUILD_PATH for the Velox target (#10615)</a> - by jinchengchenghh<br>Removed duplicate include of VELOX_BUILD_PATH in Velox target. VELOX_BUILD_PATH now included regardless of BUILD_TESTS setting.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/d721f7116106d7f21e5f3baa86362fd22f1f8654">[CORE] Merge SubstraitUtil classes (#10587)</a> - by kevinwilfong<br>Refactored two SubstraitUtil classes into a single unified class. Simplified imports and reduced code duplication in the project.</li>
+<li><a href="https://github.com/apache/incubator-gluten/commit/c6f417a9e35250321b8c3a9c45d2451dfd5f5f3a">[VL] Update class duplication list in Maven enforcer (#10536)</a> - by zhztheplayer<br>Fixed build error by updating the class duplication list in Maven enforcer. Prevented conflicts from duplicate classes in dependencies.</li>
+</ol>
+<h2>Open Pull Requests</h2>
+ (That were created in this reporting period)
+<ol>
+<li><a href="https://github.com/apache/incubator-gluten/pull/10634">#10634: [GLUTEN-10660][VL] Adding configuration for hash table build</a> - by zhouyuan</li>
+</ol>
+<hr>
+<h2>New Issues Reported that are open</h2>
+<ol>
+<li><a href="https://github.com/apache/incubator-gluten/issues/10660">#10660: [VL] add configurations for hash map build optimizations</a> - created 2025-09-09T13:32:27Z by zhouyuan</li>
+<li><a href="https://github.com/apache/incubator-gluten/issues/10658">#10658: [VL] Support Amazon Linux</a> - created 2025-09-09T08:55:37Z by zhouyuan</li>
+</ol>
+<hr>
 </body>
-</html></body></html>
+</html>

@@ -1,6 +1,10 @@
 package org.microsoft;
 
 import org.microsoft.github.data.RepositoryData;
+import org.microsoft.github.service.GitHubService;
+import org.microsoft.report.ReportService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +18,16 @@ import java.io.IOException;
  * Orchestrates the main application logic for fetching and summarizing OSS data.
  */
 public class SummaryGeneratorOrchestrator {
+    private static final Logger logger = LoggerFactory.getLogger(SummaryGeneratorOrchestrator.class);
 
     private final ConfigLoader configLoader;
-    private final GitHubDataFetcher fetcher;
-    private final AzureFoundryAgentClient agentClient;
+    private final GitHubService githubService;
+    private final ReportService reportService;
 
-    public SummaryGeneratorOrchestrator(ConfigLoader configLoader, GitHubDataFetcher fetcher, AzureFoundryAgentClient agentClient) {
+    public SummaryGeneratorOrchestrator(ConfigLoader configLoader, GitHubService githubService, AzureFoundryAgentClient agentClient) {
         this.configLoader = configLoader;
-        this.fetcher = fetcher;
-        this.agentClient = agentClient;
+        this.githubService = githubService;
+        this.reportService = new ReportService(agentClient);
     }
 
     /**
@@ -48,36 +53,42 @@ public class SummaryGeneratorOrchestrator {
         String startDate = calculateStartDate(endDate, period);
 
         long startAll = System.currentTimeMillis();
-        System.out.println("[INFO] Starting summary generation for repositories: " + repositories);
-        System.out.println("[INFO] Date period: " + startDate + " to " + endDate);
+        logger.info("Starting summary generation for repositories: {}", repositories);
+        logger.info("Date period: {} to {}", startDate, endDate);
+
         List<RepositoryData> repoDataList = new ArrayList<>();
         long startFetch = System.currentTimeMillis();
         try {
-            System.out.println("[INFO] Fetching GitHub data...");
-            repoDataList = fetcher.fetchData(repositories, startDate, endDate);
+            logger.info("Fetching GitHub data...");
+            repoDataList = githubService.fetchData(repositories, startDate, endDate, configLoader.getMsteam());
             long endFetch = System.currentTimeMillis();
-            System.out.println("[INFO] GitHub data fetched for " + repoDataList.size() + " repositories. Time taken: " + (endFetch - startFetch) + " ms");
+            logger.info("GitHub data fetched for {} repositories. Time taken: {} ms", repoDataList.size(), (endFetch - startFetch));
         } catch (Exception e) {
             long endFetch = System.currentTimeMillis();
-            System.err.println("Error fetching GitHub data: " + e.getMessage() + " (Time taken: " + (endFetch - startFetch) + " ms)");
-            e.printStackTrace();
+            logger.error("Error fetching GitHub data: {} (Time taken: {} ms)", e.getMessage(), (endFetch - startFetch), e);
         }
 
         for (RepositoryData repoData : repoDataList) {
             long startSummary = System.currentTimeMillis();
-            System.out.println("[INFO] Generating summary for repo: " + repoData.getRepoName());
-            String summary = agentClient.getSummaryFromAgent(repoData, startDate, endDate, period);
+            logger.info("Generating summary for repo: {}", repoData.getRepoName());
+
+            // Bot filtering now happens at the source during data fetching - no need to filter again here
+
+            // Use the new approach: AI for categorization/summary, local HTML generation
+            String summary = reportService.generateReport(repoData, startDate, endDate);
+
             long endSummary = System.currentTimeMillis();
-            System.out.println("[INFO] Summary generated for repo: " + repoData.getRepoName() + ". Time taken: " + (endSummary - startSummary) + " ms");
+            logger.info("Summary generated for repo: {}. Time taken: {} ms", repoData.getRepoName(), (endSummary - startSummary));
+
             String outputDir = configLoader.getOutputDir();
             String repoFileName = repoData.getRepoName().replace('/', '-').replace(' ', '_') + ".html";
             long startWrite = System.currentTimeMillis();
-            writeSummaryToHtml(outputDir, repoFileName, summary, repoData.getRepoName(), startDate, endDate);
+            writeHtmlToFile(outputDir, repoFileName, summary);
             long endWrite = System.currentTimeMillis();
-            System.out.println("[INFO] Summary written to: " + outputDir + File.separator + repoFileName + ". Time taken: " + (endWrite - startWrite) + " ms");
+            logger.info("Summary written to: {}{}{}. Time taken: {} ms", outputDir, File.separator, repoFileName, (endWrite - startWrite));
         }
         long endAll = System.currentTimeMillis();
-        System.out.println("[INFO] All summaries generated. Total time taken: " + (endAll - startAll) + " ms");
+        logger.info("All summaries generated. Total time taken: {} ms", (endAll - startAll));
     }
 
     private String calculateStartDate(String endDate, int period) {
@@ -88,21 +99,25 @@ public class SummaryGeneratorOrchestrator {
     }
 
     /**
-     * Writes the summary to an HTML file in the specified output directory.
+     * Writes the HTML report directly to file (no additional wrapping needed).
      */
-    private void writeSummaryToHtml(String outputDir, String fileName, String summary, String repoName, String startDate, String endDate) {
-        File dir = new File(outputDir);
-        if (!dir.exists()) dir.mkdirs();
-        File file = new File(dir, fileName);
-        try (FileWriter writer = new FileWriter(file)) {
-            writer.write("<html><head><title>");
-            writer.write(repoName + " Summary (" + startDate + " to " + endDate + ")");
-            writer.write("</title></head><body>");
-            writer.write(summary); // Agent output should be full HTML body
-            writer.write("</body></html>");
+    private void writeHtmlToFile(String outputDir, String fileName, String htmlContent) {
+        try {
+            File dir = new File(outputDir);
+            if (!dir.exists()) {
+                boolean created = dir.mkdirs();
+                if (!created) {
+                    logger.warn("Failed to create output directory: {}", outputDir);
+                }
+            }
+
+            File file = new File(dir, fileName);
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write(htmlContent);
+            }
+            logger.info("HTML report saved to: {}", file.getAbsolutePath());
         } catch (IOException e) {
-            System.err.println("[ERROR] Failed to write summary to HTML file: " + file.getAbsolutePath());
-            e.printStackTrace();
+            logger.error("Error writing HTML file: {}", e.getMessage(), e);
         }
     }
 }

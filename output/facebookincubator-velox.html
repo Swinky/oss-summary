@@ -1,73 +1,312 @@
-<html><head><title>facebookincubator/velox Summary (2025-09-03 to 2025-09-10)</title></head><body>```html
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>facebookincubator/velox Summary (2025-09-03 to 2025-09-10)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSS Summary Report - facebookincubator/velox</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+h1 { color: #0366d6; border-bottom: 3px solid #0366d6; padding-bottom: 10px; margin-bottom: 30px; }
+h2 { color: #24292e; border-bottom: 1px solid #e1e4e8; padding-bottom: 8px; margin-top: 30px; margin-bottom: 15px; }
+h3 { color: #586069; margin-top: 20px; margin-bottom: 8px; }
+/* Plain commit list (ordered) */
+.commit-list { margin: 0 0 12px 1.5em; padding: 0; }
+.commit-list.empty { margin-left: 0; }
+.commit-list.empty > li { list-style: none; padding: 2px 0; color: #6a737d; font-style: italic; }
+a { color: #0366d6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+em { color: #6a737d; font-style: italic; }
+</style>
 </head>
 <body>
-<h1>Overall Summary</h1>
-<p><b>Generated Summary:</b>  
-During the period from 2025-09-03 to 2025-09-10, the <a href="https://github.com/facebookincubator/velox">facebookincubator/velox</a> repository showed active development with numerous feature additions, bug fixes, and refactorings. Key highlights include templating of HyperLogLog functions, improvements in Iceberg and Delta Lake support, enhancements in cuDF GPU integration, and multiple bug fixes enhancing stability and build reliability. The team continued refactoring efforts to improve API clarity, reduce redundancy, and increase compatibility across connectors while also updating testing and build processes. This active period also involved contributions from many developers, emphasizing collaborative progress on performance and feature expansion.</p>
+<h1>facebookincubator/velox OSS Updates (2025-09-12 to 2025-09-19)</h1>
+<h2>Overall Summary</h2>
+<p>During the week of September 12-19, 2025, the facebookincubator/velox repository saw active development with 27 commits emphasizing new feature additions (9) and bug fixes (7). The team also addressed 65 new issues and processed 30 pull requests, reflecting a strong focus on expanding functionality while improving stability.</p>
+<div style="flex: 1;">
 <ul>
-  <li>Total commits: 34</li>
-  <li>Number of PRs created/updated: 32</li>
-  <li>Number of bugs reported: 3</li>
-  <li>Count per commits type (based on PR titles and issues):
-    <ul>
-      <li>Bug Fix: 7</li>
-      <li>Feature: 13</li>
-      <li>Improvement / Refactor: 10</li>
-      <li>Documentation: 1</li>
-      <li>Misc / Other: 1</li>
-    </ul>
-  </li>
+<li><b>Total commits:</b> 27</li>
+<li><b>Number of PRs created/updated:</b> 30</li>
+<li><b>Number of issues reported:</b> 65</li>
+<li><b>Count per commit type:</b> Bug Fixes: 7, New Features: 9, Improvements: 5, Others: 6</li>
+<li><b>Total commits by Microsoft Team:</b> 0</li>
 </ul>
-
-<h2>Important Bug Fixes</h2>
+</div>
+<hr>
+<h2>Microsoft Team Activity</h2>
+<h3>Pull Requests</h3>
 <ul>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14819">fix: Spark timestamp_seconds function</a>: Added support for the Spark timestamp_seconds function to properly handle fractional seconds input.</li>
-  <li><a href="https://github.com/facebookincubator/velox/issues/14817">"in" and "is_null" function registered without prefix</a>: Reported the issue that functions "in" and "is_null" are registered without prefix and suggested ensuring their inclusion in constant expression lists or registered correctly with prefix.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14799">fix(cuDF): Compilation failure</a>: Fixed a compilation error due to an undeclared symbol 'commitStrategyToString' in the cuDF connector allowing successful builds.</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14898">[#14898] misc: Remove doy alias for Spark dayofyear function</a> - by zhli1142015</li>
 </ul>
-
-<h2>New Features</h2>
+<h3>Commits</h3>
 <ul>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14816">feat: Templatize HLL</a>: Introduced templating for HyperLogLog functions to improve flexibility and performance of HLL algorithms.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14813">feat: Add IndexLookupJoinBuilder into PlanBuilder</a>: Added a new builder to unify index lookup join construction for more consistent code style across node builders.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14797">feat(cudf): Add velox-cudf support for TopN</a>: Added a new operator CudfTopN to run TopN queries on GPU with unit tests for validation.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14804">feat: Add merge_hll native function</a>: Introduced merge_hll native function optimized for vector processing batches.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14792">Add P4HyperLogLog Scalar Functions</a>: Added new P4HyperLogLog scalar functions enhancing probabilistic data structure support.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14626">feat: Add P4HyperLogLog Type</a>: Introduced a new P4HyperLogLog type with casting for varbinary types.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14721">feat: Add new function for Delta Lake deletion vector processing</a>: Added bitmap_array_contains function as part of Delta Lake deletion vector processing support.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14722">fix: Fix memory leak caused by asynchronous prefetch</a>: Fixed memory leak related to asynchronous prefetch in TableScan operator to ensure proper release of allocated memory.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14687">refactor: Make PlanBuilder connector agnostic part 1</a>: Progressed refactor to make PlanBuilder code independent of specific connectors like Hive improving modularity.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14774">feat: Add Iceberg truncate function</a>: Implemented the Iceberg truncate function aligning with Iceberg specifications with tests ported.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14775">feat: Add years, months, days, hours Iceberg functions</a>: Added time interval functions for Iceberg to compute values from epoch time.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14139">feat: Add now() and current_timestamp function</a>: Added native implementations for now() and current_timestamp functions needed for sidecar and worker-based constant folding.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14811">build(cudf): Fix cudf build with tests</a>: Added fixes to build cuDF with all tests enabled and proper CUDA compilation flags.</li>
+<li><em>No Microsoft team activity found for commits in this period.</em></li>
 </ul>
+<hr>
+<h2>Commits by Category</h2>
+<h3>Important Bug Fixes</h3>
+<ol class='commit-list'>
+<li><a href="https://github.com/facebookincubator/velox/commit/aacc0238ccf242d28ae6d06ddaa11ae62fd24278">fix(cuDF): Build failure caused by merging two PRs together (#14902)
 
-<h2>Improvements</h2>
-<ul>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14818">refactor: Remove unnecessary registerConnectorFactory calls</a>: Improved code cleanliness by eliminating redundant connector factory registrations.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14809">refactor: Delete Connector::metadata() API</a>: Removed deprecated Connector::metadata() API to reduce technical debt and streamline connector interfaces.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14806">refactor: Delete connector metadata registries</a>: Further cleanup by deleting legacy connector metadata registries as part of ongoing refactor.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14796">feat: Update Expression.cc using Casts util function for type cast</a>: Refactored Expression.cc to reuse common utility functions for type casting improving code consistency.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14698">docs(spark-functions): Clarify ANSI-compliance</a>: Updated documentation to clarify ANSI compliance status of Spark-related functions.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14746">refactor: Move FilterToExpression to test util</a>: Moved FilterToExpression helper to test utilities to reduce production code exposure.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14732">refactor: Consistently use the name 'ioExecutor' in connector API</a>: Standardized naming conventions in connector API improving readability.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14779">refactor: Use HiveConnector::registerSerDe() API</a>: Refined usage of HiveConnector APIs for better integration and maintainability.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14764">refactor: Remove backward compatible code</a>: Cleaned out legacy backward compatibility code to reduce complexity.</li>
-  <li><a href="https://github.com/facebookincubator/velox/pull/14735">fix: SortingWriter should not estimate 0 row for processing</a>: Fixed issue where SortingWriter would incorrectly estimate zero rows leading to logic faults.</li>
-</ul>
+Summary:
+PR https://github.com...</a> - by devavret<br>Fixed build failure caused by merging PR #14441 and #14294. Resolved merge conflicts to restore cuDF build and pass CI.<br><em>Summary:
+PR https://github.com/facebookincubator/velox/issues/14441 and https://github.com/facebookincubator/velox/issues/14294 went in at the same ti...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/222616728f60201b8f06bb9bcbab2357d3504763">fix: avoid vector reallocation in Presto serializer (#14884)
 
-<h2>Top Contributors</h2>
-<ul>
-  <li><a href="https://github.com/mbasmanova">mbasmanova</a></li>
-  <li><a href="https://github.com/xiaoxmeng">xiaoxmeng</a></li>
-  <li><a href="https://github.com/Yuhta">Yuhta</a></li>
-  <li><a href="https://github.com/pedroerp">pedroerp</a></li>
-  <li><a href="https://github.com/kagamiori">kagamiori</a></li>
-  <li><a href="https://github.com/laithsakka">laithsakka</a></li>
-  <li><a href="https://github.com/kevinwilfong">kevinwilfong</a></li>
-  <li><a href="https://github.com/majetideepak">majetideepak</a></li>
-  <li><a href="https://github.com/tanjialiang">tanjialiang</a></li></body></html>
+Summary:
+Pull Request resolved: https:...</a> - by marksantaniello<br>Fixed vector reallocation issue in Presto serializer to improve performance. This change prevents unnecessary memory allocation during serialization.<br><em>Summary:
+Pull Request resolved: https://github.com/facebookincubator/velox/pull/14884
+
+Pull Request resolved: https://github.com/facebookincubator/vel...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/626e4b1e08b9c3b6938179b94af05b70dcb89b1a">fix: Fix flaky ScaleWriterLocalPartitionTest.unpartitionBasic (#14892)
+
+Summary:
+The test ScaleWrite...</a> - by gggrace14<br>Fixed flaky ScaleWriterLocalPartitionTest.unpartitionBasic under specific config. Improved test stability for producer and consumer buffer scenarios.<br><em>Summary:
+The test ScaleWriterLocalPartitionTest.unpartitionBasic is flaky on the case of
+`numProducers 4, numConsumers 4, rebalanceProcessBytesThresho...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/054cf93b9f4fb87b13c0f8c99c20ae80a61acfe4">fix(parquet): Read unannotated array (#13864)
+
+Summary:
+When the element type is scalar type, a chec...</a> - by rui-mo<br>Fix parquet reader to handle unannotated arrays correctly. Enable reading of repeated fields without explicit LIST type.<br><em>Summary:
+When the element type is scalar type, a check in `convertType` requires the
+requested type must not be array. However, an unannotated array i...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/e8260f4f585546cf02238a830f0d09dc18d75386">fix: Make Spark abs function ansi-compliant (#14346)
+
+Summary:
+This PR supports ansi-compliant behav...</a> - by nimesh1601<br>Updated Spark abs function to be ANSI-compliant. This fixes issue #14345.<br><em>Summary:
+This PR supports ansi-compliant behavior for the Spark abs function.
+Fixes https://github.com/facebookincubator/velox/issues/14345.
+
+Pull Req...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/d75b0fd5a870aa6bad4aa9bd0fc53fcaf19d3ed7">fix: Expose symbol tpcds::fromTableName (#14788)
+
+Summary:
+The helper function `fromTableName`, used...</a> - by pramodsatya<br>Fixed exposure of tpcds::fromTableName in velox_tpcds_gen. Resolved datatype mismatch between function declaration and definition.<br><em>Summary:
+The helper function `fromTableName`, used to retrieve Tpcds table from it&#x27;s name, is not exposed via `velox_tpcds_gen` because the datatype f...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/f1c29268d7c9e519a9f3b922bfd240c3f1ee0ea0">fix(misc): Mute previously introduced spammy log (#14871)
+
+Summary:
+Pull Request resolved: https://g...</a> - by <br>Muted the spammy row estimate log to reduce log noise. This fix improves log clarity and debugging experience.<br><em>Summary:
+Pull Request resolved: https://github.com/facebookincubator/velox/pull/14871
+
+Mute the row estimate log as it is quite spammy. ?
+
+Reviewed B...</em></li>
+</ol>
+<h3>Features</h3>
+<ol class='commit-list'>
+<li><a href="https://github.com/facebookincubator/velox/commit/c43eab52c9f4cd7d24a729025266d77dc2e52ca0">feat: Add fuzzer generator for fb_dedup_normalize_text (#14824)
+
+Summary:
+Pull Request resolved: htt...</a> - by duxiao1212<br>Add fuzzer generator for fb_dedup_normalize_text with valid forms. Test utf8 charsets and invalid normalization forms.<br><em>Summary:
+Pull Request resolved: https://github.com/facebookincubator/velox/pull/14824
+
+1. Test the func fb_dedup_normalize_text with the valid second ...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/53a24a8c466981675508e780498741d967c2826c">feat: Templatize SparseHLL and DenseHLL memory (#13515)
+
+Summary:
+Pull Request resolved: https://git...</a> - by natashasehgal<br>Templatized SparseHLL and DenseHLL memory structures. This enables flexible usage across different types.<br><em>Summary:
+Pull Request resolved: https://github.com/facebookincubator/velox/pull/13515
+
+Templatize SparseHll and DenseHll. This will be used to add mer...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/85591fafdea8960c3605945a989d6dda06cfff5b">feat: Add support for session start time in QueryConfig (#14894)
+
+Summary:
+Pull Request resolved: ht...</a> - by <br>Added session start time support in QueryConfig. This enables setting start time in PrestoToVeloxQueryConfig.<br><em>Summary:
+Pull Request resolved: https://github.com/facebookincubator/velox/pull/14894
+
+Adding support for session start time in QueryConfig. This chan...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/43c31f4ee9893dccda5c56e4679ba2ac02ef243f">feat(abfs): Add DynamicSasTokenClientProvider to support dynamic SAS token renewal (#14045)
+
+Summary...</a> - by marin-ma<br>Added DynamicSasTokenClientProvider for dynamic SAS token renewal in Java. Users can now implement and configure SasTokenProvider interface.<br><em>Summary:
+In the Java implementation, user can implement and configure the
+`SasTokenProvider` for SAS token generation with interface
+https://github.co...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/06ea1909ee89fb9e37d0df5ed2c90dc989a035ff">feat(cudf): Support right join and right semi-join (#14441)
+
+Summary:
+Contributes to https://github....</a> - by shrshi<br>Implemented right join and right semi-join using swapped table left join. Disabled CPU fallback in cudf hash join tests to enforce GPU usage.<br><em>Summary:
+Contributes to https://github.com/facebookincubator/velox/issues/14283
+
+- [X] Implements right join and right semi-join by concatenating prob...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/3c975abdde435599ac783ec3ff989932d7250c7f">feat(cudf): Large string support for importFromArrow (#14359)
+
+Summary:
+Arrow bridge in velox does n...</a> - by karthikeyann<br>Added large string support to importFromArrow in Velox. Included unit tests for Viewer and Owner import modes.<br><em>Summary:
+Arrow bridge in velox does not support large string conversion to string vector with 64 bit offsets in Velox.
+This PR adds large strings supp...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/5c91e834eabdd86408f7821e1dffae284c6b78d6">feat(cudf): Support hash_with_seed in cudf (#14820)
+
+Summary:
+hash_with_seed signature is (constant ...</a> - by jinchengchenghh<br>Added support for hash_with_seed function in cudf with new signature. Introduced velox_cudf_spark_filter_project_test to register spark functions.<br><em>Summary:
+hash_with_seed signature is (constant integer, any...) -&gt; integer.
+Add a new test executable velox_cudf_spark_filter_project_test which needs...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/70fcb51aef01d08bff2979b269a3786ee07a33d5">feat: Extend PlanConsistencyChecker to check AggregationNode (#14877)
+
+Summary:
+Pull Request resolve...</a> - by mbasmanova<br>Extend PlanConsistencyChecker to ensure aggregate names are unique and not empty. Validate all expressions in grouping keys, aggregates, masks, and sorting keys reference existing input columns.<br><em>Summary:
+Pull Request resolved: https://github.com/facebookincubator/velox/pull/14877
+
+- Verify aggregate names are unique and not empty;
+- Verify all...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/8321974bd90e5c04c6ee6020c104b975a10e3483">feat: Add support for TIME in Simple Function Interface (#14808)
+
+Summary:
+Pull Request resolved: ht...</a> - by <br>Added TIME type support to Velox&#x27;s Simple Function Interface. Future PRs will add casting and common UDFs for TIME.<br><em>Summary:
+Pull Request resolved: https://github.com/facebookincubator/velox/pull/14808
+
+This change adds support for TIME with Velox&#x27;s simple function ...</em></li>
+</ol>
+<h3>Improvements</h3>
+<ol class='commit-list'>
+<li><a href="https://github.com/facebookincubator/velox/commit/2c1a1b0f9093ab9564e9db063d1878ee45d46eb6">refactor: Do not hold shared_ptr of the TaskQueue (#14896)
+
+Summary:
+Cursor owns TaskQueue and Task....</a> - by duanmeng<br>Refactor to avoid holding shared_ptr of TaskQueue in lambdas. Prevent crashes from leaf pools destroyed before leftover Vectors.<br><em>Summary:
+Cursor owns TaskQueue and Task. Both of the Task’s Consumer lambda and
+OnError, the lambda captures the shared_ptr of the TaskQueue. If the t...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/44b4711571292129bdd540595a3572980f5e07f3">refactor: Use &#x27;cbegin()&#x27; to assign to &#x27;const_iterator&#x27; (#14834)
+
+Summary:
+Using `cbegin()` makes the...</a> - by lingbin<br>Refactored code to use &#x27;cbegin()&#x27; for assigning to &#x27;const_iterator&#x27;. This change clarifies intent but is not strictly necessary.<br><em>Summary:
+Using `cbegin()` makes the intent more explicit, although it&#x27;s not
+actually necessary because `positions` is already a const vector.
+
+Pull Re...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/b0d52b658a65fc6f6128ef2bb1a523ec6bcf5613">refactor(cudf): Add CudfHiveConnector (#14294)
+
+Summary:
+Add CudfHiveConnector, which inherits from ...</a> - by devavret<br>Added CudfHiveConnector inheriting from HiveConnector for flexible CPU fallback. Disabled cuDF-based parquet writer temporarily.<br><em>Summary:
+Add CudfHiveConnector, which inherits from the HiveConnector.
+We want to use the HiveConnector implementation as a base for the CudfConnector...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/b564fe9b00ce6f5eee7b42942f8772979dc6ab77">refactor: Readability improvements, avoid few allocations (#14850)
+
+Summary:
+* fix: Some places have...</a> - by MBkkt<br>Fixed extra semicolons and added missing includes for cleaner code. Refactored to improve readability and reduce unnecessary allocations.<br><em>Summary:
+* fix: Some places have extra semicolon, remove it, make format better
+* fix: Add missing includes
+* refactor: type_index is just a raw point...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/b240d95bcd397181f14b6b14cfd149e748412e02">refactor: Reuse SplitReader::createRowReader in Meta internal SplitReader implementation (#14874)
+
+S...</a> - by Yuhta<br>Refactored Meta internal SplitReader to reuse SplitReader::createRowReader. Ensures future changes to createRowReader are consistently applied.<br><em>Summary:
+Pull Request resolved: https://github.com/facebookincubator/velox/pull/14874
+
+So that any future change on `createRowReader` will not be forg...</em></li>
+</ol>
+<h3>Others</h3>
+<ol class='commit-list'>
+<li><a href="https://github.com/facebookincubator/velox/commit/bccd9ff614ca3ca72294e96a4adf8d12c6013d9e">build: Use the official Snappy CMake package (#14564)
+
+Summary:
+Other dependencies such as Apache Ar...</a> - by kou<br>Removed custom Snappy find module to avoid conflicts with system package. Now using official Snappy CMake package from version 1.1.5 onwards.<br><em>Summary:
+Other dependencies such as Apache Arrow may use system Snappy CMake package. If we use custom Snappy find module, it may be conflict with sys...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/749c99544d5a6f01abf2bdcdc4814f6626381469">misc: Deprecate old IndexLookupJoinNode constructor (#14881)
+
+Summary: Pull Request resolved: https:...</a> - by zacw7<br>Deprecated the old IndexLookupJoinNode constructor. Updated code to use the new constructor.<br><em>Summary: Pull Request resolved: https://github.com/facebookincubator/velox/pull/14881
+
+Reviewed By: xuehaiping, xiaoxmeng
+
+Differential Revision: D825...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/2762233b1745414e6735c9dab7e6e7385dccc2a9">build: Install missing header files by `cmake --install` (#14872)
+
+Summary:
+Fixes https://github.com...</a> - by kou<br>Fixed missing header files installation by updating cmake install rules. Excluded headers in specific directories like benchmarks and tests.<br><em>Summary:
+Fixes https://github.com/facebookincubator/velox/issues/14763
+
+This installs all header files except in the following directories:
+
+* `benchm...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/4f96755900957e6d87165552c37806bf3b0924ee">build: Remove needless `gflags::gflags` workaround (#14829)
+
+Summary:
+Fixes https://github.com/faceb...</a> - by kou<br>Removed unnecessary gflags::gflags workaround for build compatibility. Supports old CMake versions before 3.18 that lack alias target feature.<br><em>Summary:
+Fixes https://github.com/facebookincubator/velox/issues/14760
+
+It&#x27;s needed for old CMake such as CMake 3.16. CMake 3.18 or later can create a...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/2188fd503685cb2a633c43bc1c8c6c78427d8977">build: Fix CuDF + Parquet test build failure (#14870)
+
+Summary:
+Fixes https://github.com/facebookinc...</a> - by kou<br>Fixed build failure in CuDF + Parquet tests by correcting namespace usage. ParquetConnectorFactory is in facebook::velox::cudf_velox, not facebook::velox.<br><em>Summary:
+Fixes https://github.com/facebookincubator/velox/issues/14869
+
+`connector::parquet::ParquetConnectorFactory` exists in `facebook::velox::cudf...</em></li>
+<li><a href="https://github.com/facebookincubator/velox/commit/b3c1f38414e6c0b33d689159e860ae80f28b7e94">build(pyvelox): Don&#x27;t install pyvelox_libraries with VELOX_BUILD_PYTHON_PACKAGE=NO (#14812)
+
+Summary...</a> - by kou<br>Avoid installing pyvelox_libraries when VELOX_BUILD_PYTHON_PACKAGE=NO. This fixes issue #14756 in the build process.<br><em>Summary:
+Fixes https://github.com/facebookincubator/velox/issues/14756
+
+Pull Request resolved: https://github.com/facebookincubator/velox/pull/14812
+
+...</em></li>
+</ol>
+<h2>Open Pull Requests</h2>
+ (That were created in this reporting period)
+<ol>
+<li><a href="https://github.com/facebookincubator/velox/pull/14752">#14752: docs(cuDF): First draft of readme</a> - by GregoryKimball</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14755">#14755: fix: ArrowArrayStruct contains null data pointer for a buffer with non-zero computed size</a> - by wecharyu</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14911">#14911: docs: Fix iceberg functions formatting and some warnings</a> - by majetideepak</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14665">#14665: feat(hdfs): Add close() API to disconnect the hdfs connection</a> - by JkSelf</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14616">#14616: docs(hdfs): Update libhdfs3 and jvm libhdfs support</a> - by JkSelf</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14666">#14666: fix(hdfs): Nullify hdfsFile_ before checking success status</a> - by boneanxs</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14677">#14677: feat: Support compression for TextWriter</a> - by xin-zhang2</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14898">#14898: misc: Remove doy alias for Spark dayofyear function</a> - by zhli1142015</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14906">#14906: fix(SMJ): verify SMJ comparison with two join keys </a> - by Henry2SS</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14247">#14247: feat(connector): Add extended equality delete support and test coverage</a> - by Joe-Abraham</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14775">#14775: feat: Add years, months, days, hours Iceberg functions</a> - by jinchengchenghh</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14910">#14910: fix: Allow scientific when casting from decimal to string</a> - by boneanxs</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14909">#14909: feat: Add Spark months_between function</a> - by zml1206</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/11824">#11824: feat: Support prefix comparator in spill merge</a> - by jinchengchenghh</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14819">#14819: fix: Spark timestamp_seconds function</a> - by rui-mo</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/11934">#11934: feat: Add map_from_entries Spark function</a> - by PHILO-HE</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14728">#14728: fix(cudf): Fix table scan fallback condition and library</a> - by jinchengchenghh</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14904">#14904: fix(misc): Slightly improve row size tracking query config documentation</a> - by HuamengJiang</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14907">#14907: feat: support parquet dictionary filter rowgroup skipping</a> - by jaystarshot</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14830">#14830: feat: Add allocation records to local memory exceeds exception in debug mode</a> - by kletkavrubashku</li>
+<li><a href="https://github.com/facebookincubator/velox/pull/14903">#14903: Add session properties for small batch size mitigation</a> - by HuamengJiang</li>
+</ol>
+<hr>
+<h2>New Issues Reported that are open</h2>
+<ol>
+<li><a href="https://github.com/facebookincubator/velox/issues/14911">#14911: docs: Fix iceberg functions formatting and some warnings</a> - created 2025-09-19T17:35:52Z by majetideepak</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14910">#14910: fix: Allow scientific when casting from decimal to string</a> - created 2025-09-19T11:06:00Z by boneanxs</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14909">#14909: feat: Add Spark months_between function</a> - created 2025-09-19T09:28:38Z by zml1206</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14908">#14908: SMJ compare logic in not right when there are more than one join key</a> - created 2025-09-19T04:45:33Z by Henry2SS</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14907">#14907: feat: support parquet dictionary filter rowgroup skipping</a> - created 2025-09-19T04:43:59Z by jaystarshot</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14906">#14906: fix(SMJ): verify SMJ comparison with two join keys </a> - created 2025-09-19T03:47:49Z by Henry2SS</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14905">#14905: TPCH benchmark test Q4 abort with sve_build</a> - created 2025-09-19T01:23:52Z by xiechao168</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14904">#14904: fix(misc): Slightly improve row size tracking query config documentation</a> - created 2025-09-19T00:29:27Z by HuamengJiang</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14903">#14903: Add session properties for small batch size mitigation</a> - created 2025-09-19T00:17:53Z by HuamengJiang</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14901">#14901: fix: Folly::init -&gt; folly::Init in velox</a> - created 2025-09-18T18:11:07Z by r-barnes</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14898">#14898: misc: Remove doy alias for Spark dayofyear function</a> - created 2025-09-18T14:36:17Z by zhli1142015</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14897">#14897: Add `ignoreDuplicates` for `AggregateFunctionMetadata`</a> - created 2025-09-18T14:06:46Z by MBkkt</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14895">#14895: Aggregations over sorted unique values are not supported yet</a> - created 2025-09-18T11:42:45Z by pashandor789</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14893">#14893: How we handle &#x27;\0&#x27; as partition values</a> - created 2025-09-18T03:28:55Z by boneanxs</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14890">#14890: Presto current_date should be based of session time</a> - created 2025-09-17T23:27:05Z by kgpai</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14889">#14889: feat: Create config Interface</a> - created 2025-09-17T22:21:13Z by codeworse</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14888">#14888: fbcode/velox/exec/ExchangeQueue.cpp</a> - created 2025-09-17T22:11:33Z by yfeldblum</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14887">#14887: feat: Add support for casting TIME to VARCHAR</a> - created 2025-09-17T22:09:04Z by kgpai</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14886">#14886: feat: Add support for localtime</a> - created 2025-09-17T22:05:41Z by kgpai</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14885">#14885: Support multiple ABFS file system instances</a> - created 2025-09-17T20:49:52Z by xin-zhang2</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14883">#14883: feat: Pass requestOptions per I/O call</a> - created 2025-09-17T15:33:35Z by vhsu14</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14880">#14880: Refactor registerAbfsFileSystem to create a singleton for each authentication type</a> - created 2025-09-16T22:22:11Z by xin-zhang2</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14879">#14879: feat: Add maximum entry count limit to AsyncDataCache</a> - created 2025-09-16T21:25:25Z by zacw7</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14878">#14878: fix: Build fails with &quot;‘this’ pointer is null&quot;</a> - created 2025-09-16T19:02:16Z by zhztheplayer</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14876">#14876: Velox TPCH Implementation Violates Foreign Key Constraints</a> - created 2025-09-16T17:46:19Z by tdcmeehan</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14875">#14875: Velox and Presto Java TPCH Implementations Generate Different Random Data</a> - created 2025-09-16T17:44:12Z by tdcmeehan</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14873">#14873: feat(streaming): add streaming related support</a> - created 2025-09-16T08:21:58Z by shuai-xu</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14868">#14868: misc: Make WriterOptions serializable</a> - created 2025-09-16T05:01:16Z by yingsu00</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14867">#14867: [cuDF] Add a step to the adapters build to verify that Velox links to cuDF</a> - created 2025-09-15T20:07:47Z by GregoryKimball</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14865">#14865: feat(cudf): Add the LOG_VALIDATION_MSG Micro to get the fallback reason</a> - created 2025-09-15T15:58:30Z by jinchengchenghh</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14864">#14864: fix: Add generalized array_frequency array support to any element type</a> - created 2025-09-15T15:49:48Z by han-yan01</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14862">#14862: feat(udf): Add array_subset UDF analogous to map_subset</a> - created 2025-09-15T14:41:15Z by abhinavmuk04</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14861">#14861: feat: Prepare documentation for Delta Lake functions</a> - created 2025-09-15T09:22:31Z by zhztheplayer</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14856">#14856: refactor(test): Remove duplicate code in StringFunctionsTest</a> - created 2025-09-12T23:01:23Z by czentgr</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14853">#14853: [Prestissimo] Connector Config Clean Up</a> - created 2025-09-12T22:35:01Z by kewang1024</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14851">#14851: feat: Support using parquet field_id for column matching</a> - created 2025-09-12T16:34:44Z by PingLiuPing</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14849">#14849: build: Add &#x27;abseil&#x27; as a build dependency for re2</a> - created 2025-09-12T15:17:03Z by tdcmeehan</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14847">#14847: Read PrestoPage maps directly into homogeneous structs</a> - created 2025-09-12T07:23:11Z by mbasmanova</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14846">#14846: feat(Nimble): New Flush Policy Implementation With Chunking</a> - created 2025-09-12T06:07:51Z by macvincent</li>
+<li><a href="https://github.com/facebookincubator/velox/issues/14840">#14840: feat: Add insertTableHandle as input parameter to tableWrite</a> - created 2025-09-12T00:45:13Z by emilysun201309</li>
+</ol>
+<hr>
+</body>
+</html>

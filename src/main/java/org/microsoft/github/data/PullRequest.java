@@ -27,20 +27,8 @@ public class PullRequest {
     private String authorLogin;
     /** List of assignee logins */
     private List<String> assignees;
-    /** List of label names */
-    private List<String> labels;
-    /** Number of comments */
-    private int comments;
     /** Pull request body text */
     private String body;
-    /** Number of commits in the pull request */
-    private int commits;
-    /** Number of additions */
-    private int additions;
-    /** Number of deletions */
-    private int deletions;
-    /** Number of changed files */
-    private int changedFiles;
 
     public PullRequest() {}
 
@@ -65,25 +53,8 @@ public class PullRequest {
     public void setAuthorLogin(String authorLogin) { this.authorLogin = authorLogin; }
     public List<String> getAssignees() { return assignees; }
     public void setAssignees(List<String> assignees) { this.assignees = assignees; }
-    public List<String> getLabels() {
-        if (labels == null) {
-            labels = new java.util.ArrayList<>();
-        }
-        return labels;
-    }
-    public void setLabels(List<String> labels) { this.labels = labels; }
-    public int getComments() { return comments; }
-    public void setComments(int comments) { this.comments = comments; }
     public String getBody() { return body; }
     public void setBody(String body) { this.body = body; }
-    public int getCommits() { return commits; }
-    public void setCommits(int commits) { this.commits = commits; }
-    public int getAdditions() { return additions; }
-    public void setAdditions(int additions) { this.additions = additions; }
-    public int getDeletions() { return deletions; }
-    public void setDeletions(int deletions) { this.deletions = deletions; }
-    public int getChangedFiles() { return changedFiles; }
-    public void setChangedFiles(int changedFiles) { this.changedFiles = changedFiles; }
 
     @Override
     public String toString() {
@@ -98,13 +69,6 @@ public class PullRequest {
                 ", mergedAt='" + mergedAt + '\'' +
                 ", authorLogin='" + authorLogin + '\'' +
                 ", assignees=" + assignees +
-                ", labels=" + labels +
-                ", comments=" + comments +
-                ", body='" + body + '\'' +
-                ", commits=" + commits +
-                ", additions=" + additions +
-                ", deletions=" + deletions +
-                ", changedFiles=" + changedFiles +
                 '}';
     }
 
@@ -115,11 +79,6 @@ public class PullRequest {
         PullRequest that = (PullRequest) o;
         return id == that.id &&
                 number == that.number &&
-                comments == that.comments &&
-                commits == that.commits &&
-                additions == that.additions &&
-                deletions == that.deletions &&
-                changedFiles == that.changedFiles &&
                 Objects.equals(title, that.title) &&
                 Objects.equals(state, that.state) &&
                 Objects.equals(createdAt, that.createdAt) &&
@@ -128,12 +87,11 @@ public class PullRequest {
                 Objects.equals(mergedAt, that.mergedAt) &&
                 Objects.equals(authorLogin, that.authorLogin) &&
                 Objects.equals(assignees, that.assignees) &&
-                Objects.equals(labels, that.labels) &&
                 Objects.equals(body, that.body);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, number, title, state, createdAt, updatedAt, closedAt, mergedAt, authorLogin, assignees, labels, comments, body, commits, additions, deletions, changedFiles);
+        return Objects.hash(id, number, title, state, createdAt, updatedAt, closedAt, mergedAt, authorLogin, assignees, body);
     }
 }

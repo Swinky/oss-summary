@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSS Summary Report - apache/spark</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+h1 { color: #0366d6; border-bottom: 3px solid #0366d6; padding-bottom: 10px; margin-bottom: 30px; }
+h2 { color: #24292e; border-bottom: 1px solid #e1e4e8; padding-bottom: 8px; margin-top: 30px; margin-bottom: 15px; }
+h3 { color: #586069; margin-top: 20px; margin-bottom: 8px; }
+/* Plain commit list (ordered) */
+.commit-list { margin: 0 0 12px 1.5em; padding: 0; }
+.commit-list.empty { margin-left: 0; }
+.commit-list.empty > li { list-style: none; padding: 2px 0; color: #6a737d; font-style: italic; }
+a { color: #0366d6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+em { color: #6a737d; font-style: italic; }
+</style>
+</head>
+<body>
+<h1>apache/spark OSS Updates (2025-09-12 to 2025-09-19)</h1>
+<h2>Overall Summary</h2>
+<p>During the week of 2025-09-12 to 2025-09-19, the apache/spark repository saw active development with 30 commits across 30 pull requests, highlighting a balanced focus on new features and improvements. Notably, 4 new features were introduced alongside 7 enhancements, while 3 bug fixes addressed stability concerns. The high influx of 75 new issues indicates growing community engagement and potential areas for future work.</p>
+<div style="flex: 1;">
+<ul>
+<li><b>Total commits:</b> 30</li>
+<li><b>Number of PRs created/updated:</b> 30</li>
+<li><b>Number of issues reported:</b> 75</li>
+<li><b>Count per commit type:</b> Bug Fixes: 3, New Features: 4, Improvements: 7, Others: 16</li>
+<li><b>Total commits by Microsoft Team:</b> 0</li>
+</ul>
+</div>
+<hr>
+<h2>Microsoft Team Activity</h2>
+<h3>Pull Requests</h3>
+<ul>
+<li><em>No Microsoft team activity found for pull requests in this period.</em></li>
+</ul>
+<h3>Commits</h3>
+<ul>
+<li><em>No Microsoft team activity found for commits in this period.</em></li>
+</ul>
+<hr>
+<h2>Commits by Category</h2>
+<h3>Important Bug Fixes</h3>
+<ol class='commit-list'>
+<li><a href="https://github.com/apache/spark/commit/9d23f2ffaf3dee13867313c58e3ac2081dbba693">[SPARK-53355][PYTHON][SQL] fix numpy 1.x repr in type tests
+
+### What changes were proposed in this ...</a> - by benhurdelhey<br>Fixed numpy 1.x representation in PySpark SQL type tests. This is a minor follow-up to a previous PR.<br><em>### What changes were proposed in this pull request?
+
+- this is a minor followup to https://github.com/apache/spark/pull/52105, we noticed that the te...</em></li>
+<li><a href="https://github.com/apache/spark/commit/f49047130fdb41fdffa7b9329f03337ead09f041">[SPARK-52659][SQL] Misleading modulo error message in ansi mode
+
+### What changes were proposed in t...</a> - by SEONGJAEGONG<br>Corrected modulo error message in ANSI mode from MOD_BY_ZERO to REMAINDER_BY_ZERO. Improved clarity of SQL error reporting for division by zero cases.<br><em>### What changes were proposed in this pull request?
+
+1. **Updated error condition**: Changed `MOD_BY_ZERO` to `REMAINDER_BY_ZERO` in `error-condition...</em></li>
+<li><a href="https://github.com/apache/spark/commit/78aba006b836dc466da28700fa72d13ff4a9e3a6">[SPARK-53581][CORE] Fix potential thread-safety issue for mapTaskIds.add()
+
+### What changes were pr...</a> - by Ngone51<br>Fixed thread-safety issue in mapTaskIds.add() in Spark core. This is a follow-up to a previous related pull request.<br><em>### What changes were proposed in this pull request?
+
+This a followup for https://github.com/apache/spark/pull/47037. This PR wraps up the synchronize...</em></li>
+</ol>
+<h3>Features</h3>
+<ol class='commit-list'>
+<li><a href="https://github.com/apache/spark/commit/589141e3085a2cb875cfda8530b800fc53ac019f">[SPARK-53233][SQL][FOLLOWUP] Add compatibility class/object for org.apache.spark.sql.execution.strea...</a> - by cloud-fan<br>Added compatibility class/object for streaming execution in Spark SQL. This is a follow-up to improve streaming module integration.<br><em>### What changes were proposed in this pull request?
+
+This is a followup of https://github.com/apache/spark/pull/51959 . Although internal APIs are al...</em></li>
+<li><a href="https://github.com/apache/spark/commit/a8bb8b05d41e1aae60b72905f5429e170c82e5ca">[SPARK-53625][SS] Propagate metadata columns through projections to address ApplyCharTypePadding inc...</a> - by liviazhu<br>Fixed metadata column propagation in streaming microbatch projections. Resolved ApplyCharTypePadding compatibility issue in Spark Structured Streaming.<br><em>### What changes were proposed in this pull request?
+
+Modify streaming MicrobatchExecution to propagate metadata columns through projections to resolv...</em></li>
+<li><a href="https://github.com/apache/spark/commit/3080e61e5ff0caf2d1be972e3816e84e4230975a">[SPARK-53387][PYTHON] Add support for Arrow UDTFs with PARTITION BY
+
+### What changes were proposed ...</a> - by allisonwang-db<br>Added support for Arrow UDTFs with PARTITION BY in PySpark. Enhanced Python UDTF functionality for better partitioning.<br><em>### What changes were proposed in this pull request?
+
+This PR adds support for Arrow UDTFs with PARTITION BY functionality. It adds a new `ArrowUDTFWi...</em></li>
+<li><a href="https://github.com/apache/spark/commit/3d87de318b62703785a07845899a0d30e32dfd29">[SPARK-53594][PYTHON] Make arrow UDF respect user-specified eval type
+
+### What changes were propose...</a> - by zhengruifeng<br>Arrow UDF now respects the user-specified evaluation type. This change improves customization in PySpark UDF execution.<br><em>### What changes were proposed in this pull request?
+Make arrow UDF respect user-specified eval type
+
+### Why are the changes needed?
+to be consistent...</em></li>
+</ol>
+<h3>Improvements</h3>
+<ol class='commit-list'>
+<li><a href="https://github.com/apache/spark/commit/4f10262391f8531f5b997345f10342ba4c2012bf">[SPARK-53623][SQL] improve reading large table properties performance
+
+### What changes were propose...</a> - by yeshengm<br>Optimized CatalogColumnStat.readLargeTableProp to reduce complexity from O(N^2) to O(N). Improved performance for tables with many properties in Spark SQL.<br><em>### What changes were proposed in this pull request?
+The CatalogColumnStat.readLargeTableProp is an O(N) operation. Considering a table can have a lot...</em></li>
+<li><a href="https://github.com/apache/spark/commit/db13a38e565b3467b036fbda9cf9e57092d97a43">[SPARK-53578][CONNECT] Simplify data type handling in LiteralValueProtoConverter
+
+### What changes w...</a> - by heyihong<br>Simplified data type handling in LiteralValueProtoConverter for Spark Connect. Improved code clarity and maintainability.<br><em>### What changes were proposed in this pull request?
+
+This PR simplifies data type handling in the Spark Connect `LiteralValueProtoConverter` by conso...</em></li>
+<li><a href="https://github.com/apache/spark/commit/4b93d4cfd49aee7f550597cfe6933c3f063c4a36">[SPARK-53598][SQL] Check the existence of numParts before reading large table property
+
+### What cha...</a> - by pan3793<br>Fixed regression by checking numParts existence before reading large table property. Improved SQL handling for large table metadata in Spark.<br><em>### What changes were proposed in this pull request?
+
+This PR proposes to fix a regression caused by SPARK-33812 (https://github.com/apache/spark/comm...</em></li>
+<li><a href="https://github.com/apache/spark/commit/010d36f219402e98849e82d72f88967d219fe2b9">[SPARK-53507][CONNECT] Add breaking change info to errors
+
+### What changes were proposed in this pu...</a> - by imarkowitz<br>Added breaking change metadata to error messages for better clarity. Each breaking change now includes migration info in the errors.<br><em>### What changes were proposed in this pull request?
+
+Adds breaking change metadata to error messages
+
+Each breaking change includes a migration messa...</em></li>
+<li><a href="https://github.com/apache/spark/commit/3990b0f1d9833bfabab548f5c648215e23256ecc">[SPARK-53620][CORE] SparkSubmit should print stacktrace when exitFn is called
+
+### What changes were...</a> - by pan3793<br>Modified SparkSubmit to print stacktrace when exitFn is called. exitFn now accepts an Option[Throwable] for error handling.<br><em>### What changes were proposed in this pull request?
+
+Change `exitFn` to accept an `Option[Throwable]` and print the stacktrace before exiting the JVM...</em></li>
+<li><a href="https://github.com/apache/spark/commit/87a71fabb097e1543a935fae8167bc47a29a127e">[SPARK-53438][CONNECT][SQL] Use CatalystConverter in LiteralExpressionProtoConverter
+
+### What chang...</a> - by heyihong<br>Refactored LiteralExpressionProtoConverter to use CatalystConverter. Improved SQL and Connect integration in Spark.<br><em>### What changes were proposed in this pull request?
+
+This PR refactors the `LiteralExpressionProtoConverter` to use `CatalystTypeConverters` for cons...</em></li>
+<li><a href="https://github.com/apache/spark/commit/53a330b2eb93a74fdc6a17b4127486397024309d">[SPARK-53602][PYTHON] Profile dump improvement and profiler doc fix
+
+### What changes were proposed ...</a> - by xinrong-meng<br>Fixed race condition in profile dump directory creation. Improved profiler documentation for clarity.<br><em>### What changes were proposed in this pull request?
+- Avoid race condition when creating directory of profile dump
+- Fix profiler docs
+
+### Why are t...</em></li>
+</ol>
+<h3>Others</h3>
+<ol class='commit-list'>
+<li><a href="https://github.com/apache/spark/commit/552effccce9afb7875ad4fc6cf020d457dd0c267">[SPARK-53637][BUILD] Demote bcprov-jdk18on to test scope
+
+### What changes were proposed in this pul...</a> - by pan3793<br>Demoted bcprov-jdk18on dependency to test scope in build configuration. This change reverts the previous update from SPARK-51311.<br><em>### What changes were proposed in this pull request?
+
+This PR logically reverts SPARK-51311.
+
+### Why are the changes needed?
+
+HADOOP-19152 has alread...</em></li>
+<li><a href="https://github.com/apache/spark/commit/fb46424cd112937b22c13594eb04976b121bc0d3">[SPARK-53626][DOCS] Add invalid mixed-type operations to ANSI migration guide
+
+### What changes were...</a> - by xinrong-meng<br>Added invalid mixed-type operations section to ANSI migration guide. This helps users transition smoothly with ANSI enabled by default in Pandas API on Spark.<br><em>### What changes were proposed in this pull request?
+Add invalid mixed-type operations to ANSI migration guide
+
+### Why are the changes needed?
+Smooth...</em></li>
+<li><a href="https://github.com/apache/spark/commit/2639792771988e3ea6fefdcf29191678db33bb4e">[SPARK-53523][SQL][FOLLOWUP] Udpate scaladocs and add tests in ProcedureSuite
+
+### What changes were...</a> - by pan3793<br>Updated scaladocs for ProcedureSuite to improve clarity. Added new tests to enhance coverage and address review comments.<br><em>### What changes were proposed in this pull request?
+
+As title.
+
+### Why are the changes needed?
+
+Address comments https://github.com/apache/spark/pul...</em></li>
+<li><a href="https://github.com/apache/spark/commit/49a3c132e1cbb939751766f5c46c94c08ea3dcc3">[SPARK-53632][PYTHON][DOCS][TESTS] Reenable doctest for `DataFrame.pandas_api`
+
+### What changes wer...</a> - by zhengruifeng<br>Reenabled doctest for DataFrame.pandas_api in Python. Improved documentation and test coverage for pandas API.<br><em>### What changes were proposed in this pull request?
+Reenable doctest for `DataFrame.pandas_api`
+
+### Why are the changes needed?
+for test coverage, t...</em></li>
+<li><a href="https://github.com/apache/spark/commit/1795306078e00d119788911f89797f901bcad718">[SPARK-53323][PYTHON][CONNECT] Enable Spark Connect tests for df.asTable() in Arrow UDTF
+
+### What c...</a> - by shujingyang-db<br>Enabled Spark Connect tests for df.asTable() in Arrow UDTF. This change improves test coverage for Python Spark Connect features.<br><em>### What changes were proposed in this pull request?
+
+As titled.
+
+### Why are the changes needed?
+
+Test-only change
+
+### Does this PR introduce _any_ ...</em></li>
+<li><a href="https://github.com/apache/spark/commit/1ec647ea17d8684774670a84bb8a7f7b9cbd11e8">[SPARK-53630][PYTHON][DOCS][TESTS] Reenable doctest for `Dataframe.freqItems`
+
+### What changes were...</a> - by zhengruifeng<br>Reenabled doctest for Dataframe.freqItems to improve test coverage. Fixed example code to ensure doctest runs correctly.<br><em>### What changes were proposed in this pull request?
+Reenable doctest for `Dataframe.freqItems`, by make the example deterministic
+
+### Why are the ch...</em></li>
+<li><a href="https://github.com/apache/spark/commit/b87f6d14a78744f284f5c699506419343d722253">[MINOR][TESTS] Restore classic-only python tests
+
+### What changes were proposed in this pull reques...</a> - by zhengruifeng<br>Restored classic-only Python tests in the codebase. This ensures legacy test coverage is maintained.<br><em>### What changes were proposed in this pull request?
+Restore classic-only python tests
+
+### Why are the changes needed?
+https://github.com/apache/spar...</em></li>
+<li><a href="https://github.com/apache/spark/commit/551e7f2e1e829acfca0c692e9ce803a967490fdc">[SPARK-53619][PYTHON][DOCS][TESTS] Enable doctests for toArrow/toPandas/mapInArrow/mapInPandas
+
+### ...</a> - by zhengruifeng<br>Enabled doctests for toArrow, toPandas, mapInArrow, and mapInPandas functions. Improved test coverage and documentation accuracy.<br><em>### What changes were proposed in this pull request?
+Enable doctests for toArrow/toPandas/mapInArrow/mapInPandas
+
+### Why are the changes needed?
+for ...</em></li>
+<li><a href="https://github.com/apache/spark/commit/79a92831cc69559c823c06f5335d5badcb07df1c">[SPARK-53372][SDP] SDP End to End Testing Suite
+
+### What changes were proposed in this pull request...</a> - by jackywang-db<br>Added end-to-end testing suite for SDP simulating user pipeline CLI usage. Improved test coverage for SDP workflows and execution.<br><em>### What changes were proposed in this pull request?
+
+End to end testing for SDP that simulates a user using the pipelines CLI to execute each test ca...</em></li>
+<li><a href="https://github.com/apache/spark/commit/e08c15b62712303942284cb90d6a1b004f69652c">[SPARK-53606][DOCS] Fix MapInPandas/MapInArrow examples with barrier
+
+### What changes were proposed...</a> - by zhengruifeng<br>Fixed MapInPandas and MapInArrow examples to include barrier usage. Improved documentation accuracy for these APIs.<br><em>### What changes were proposed in this pull request?
+Fix MapInPandas/MapInArrow examples with barrier
+
+### Why are the changes needed?
+the two example...</em></li>
+<li><a href="https://github.com/apache/spark/commit/f57a473a02e4fb7a05e1c62c6f5cf8f461e4f8b9">[SPARK-53546][TESTS][FOLLOW-UP] Fix nested array schema evolution and style for InMemoryBaseTable
+
+#...</a> - by szehon-ho<br>Fixed nested array struct schema evolution in InMemoryBaseTable. Applied style improvements based on review comments.<br><em>### What changes were proposed in this pull request?
+Fix nested array struct schema evolution case for InMemoryDataSource, also style fixes.
+
+### Why ...</em></li>
+<li><a href="https://github.com/apache/spark/commit/33e40b71b0bb09df2a37818fead439156edc5e20">[SPARK-52991][SQL][FOLLOW-UP] Revise `MergeIntoTable` to use `lazy val` and add a new test
+
+### What...</a> - by szehon-ho<br>Optimized MergeIntoTable node by using lazy val for state calculation. Added a new test to verify the changes.<br><em>### What changes were proposed in this pull request?
+Minor follow up for https://github.com/apache/spark/pull/51698
+
+1. Small optimization for MergeIn...</em></li>
+<li><a href="https://github.com/apache/spark/commit/067f295f062bb51acb64f3b9bb7972ea80992e81">[SPARK-53604][INFRA] Temporarily increase PySpark job execution time to 150 minutes
+
+### What change...</a> - by zhengruifeng<br>Temporarily increased PySpark job execution time to 150 minutes. This change helps accommodate longer running tests in the CI pipeline.<br><em>### What changes were proposed in this pull request?
+Temporarily increase PySpark job execution time to 150 minutes
+
+### Why are the changes needed?
+T...</em></li>
+<li><a href="https://github.com/apache/spark/commit/aaf9308307ccf9d8e6d35e0310fbe8da57b9c54e">[MINOR][DOCS] Update the `See Also` section for time functions
+
+### What changes were proposed in th...</a> - by zhengruifeng<br>Updated the `See Also` section for time functions in the documentation. Improved references to related time function docs for clarity.<br><em>### What changes were proposed in this pull request?
+Update the `See Also` section for time functions
+
+### Why are the changes needed?
+doc improvement...</em></li>
+<li><a href="https://github.com/apache/spark/commit/5d1ad6187733f3817d64d2644e40a7da0c87e3a6">[SPARK-53603][BUILD] Upgrade Checkstyle to 11.0.1
+
+### What changes were proposed in this pull reque...</a> - by dongjoon-hyun<br>Upgraded Checkstyle from version 10.21.2 to 11.0.1. This update supports Java 17 and includes latest language improvements.<br><em>### What changes were proposed in this pull request?
+
+This PR aims to upgrade Checkstyle to 11.0.1 from 10.21.2.
+
+### Why are the changes needed?
+
+Che...</em></li>
+<li><a href="https://github.com/apache/spark/commit/4aa934ec04017f46625acab19250ebd68f10628a">[SPARK-53599][BUILD] Upgrade `Netty` to 4.1.127.Final
+
+### What changes were proposed in this pull r...</a> - by LuciferYang<br>Upgraded Netty to version 4.1.127.Final and netty-tcnative to 2.0.73. This update improves build dependencies and security patches.<br><em>### What changes were proposed in this pull request?
+This PR upgrades Netty from 4.1.126.Final to 4.1.127.Final and netty-tcnative from 2.0.72.Final t...</em></li>
+</ol>
+<h2>Open Pull Requests</h2>
+ (That were created in this reporting period)
+<ol>
+<li><a href="https://github.com/apache/spark/pull/52328">#52328: [SPARK-53593][SDP] Add response field for DefineDataset and DefineFlow RPC</a> - by cookiedough77</li>
+<li><a href="https://github.com/apache/spark/pull/51831">#51831: [SPARK-53112][SQL][PYTHON][CONNECT] Support TIME in the make_timestamp_ntz and try_make_timestamp_ntz functions in PySpark</a> - by uros-db</li>
+<li><a href="https://github.com/apache/spark/pull/52154">#52154: [SPARK-52807][SDP] Proto changes to support analysis inside Declarative Pipelines query functions</a> - by SCHJonathan</li>
+<li><a href="https://github.com/apache/spark/pull/52370">#52370: [WIP] Transition PySpark default to bytes instead of bytesarray</a> - by craiuconstantintiberiu</li>
+<li><a href="https://github.com/apache/spark/pull/52391">#52391: [SPARK-53638] Limit the byte size of arrow batch for TWS to avoid OOM</a> - by zeruibao</li>
+<li><a href="https://github.com/apache/spark/pull/52394">#52394: [MINOR][TESTS] Fix the intention of &#x27;read parquet footers in parallel&#x27; test</a> - by yaooqinn</li>
+<li><a href="https://github.com/apache/spark/pull/52393">#52393: [SPARK-53645][PS] Implement `skipna` parameter for ps.DataFrame `any()`</a> - by petern48</li>
+<li><a href="https://github.com/apache/spark/pull/52371">#52371: [WIP][SPARK-53621][CORE] Adding Support for Executing CONTINUE HANDLER</a> - by TeodorDjelic</li>
+<li><a href="https://github.com/apache/spark/pull/51467">#51467: [WIP][SPARK-53504][SQL] Type framework</a> - by MaxGekk</li>
+<li><a href="https://github.com/apache/spark/pull/52395">#52395: [SPARK-53553][CONNECT][4.0] Fix handling of null values in LiteralValueProtoConverter</a> - by heyihong</li>
+<li><a href="https://github.com/apache/spark/pull/52384">#52384: [SPARK-53633][SQL] Reuse InputStream in vectorized Parquet reader</a> - by pan3793</li>
+<li><a href="https://github.com/apache/spark/pull/52382">#52382: [SPARK-53631][CORE][SHS] Optimize memory and perf on SHS bootstrap</a> - by pan3793</li>
+<li><a href="https://github.com/apache/spark/pull/51046">#51046: [SPARK-51831][SQL] Column pruning with existsJoin for Datasource V2</a> - by jackylee-ch</li>
+<li><a href="https://github.com/apache/spark/pull/52335">#52335: [SPARK-53564][CORE] Avoid DAGScheduler exits due to blockManager RPC timeout in DAGSchedulerEventProcessLoop </a> - by ivoson</li>
+<li><a href="https://github.com/apache/spark/pull/52377">#52377: [SPARK-53629][SQL] Implement type widening for MERGE INTO WITH SCHEMA EVOLUTION</a> - by szehon-ho</li>
+<li><a href="https://github.com/apache/spark/pull/52348">#52348: [SPARK-53591][SDP] Simplify Pipeline Spec Pattern Glob Matching</a> - by JiaqiWang18</li>
+<li><a href="https://github.com/apache/spark/pull/52385">#52385: [SPARK-53598][SQL][3.5] Check the existence of numParts before reading large table property</a> - by pan3793</li>
+<li><a href="https://github.com/apache/spark/pull/52373">#52373: [SPARK-53622][CORE][TEST] Improve `UninterruptibleThreadSuite`</a> - by vrozov</li>
+<li><a href="https://github.com/apache/spark/pull/50873">#50873: [SPARK-52104][CONNECT][SCALA] Validate column name eagerly in Spark Connect Scala Client</a> - by xi-db</li>
+<li><a href="https://github.com/apache/spark/pull/51143">#51143: Better do idle python workers cleanup</a> - by antban</li>
+<li><a href="https://github.com/apache/spark/pull/52388">#52388: [SPARK-39328][SQL][TESTS] Fix flaky test `SPARK-37753: Inhibit broadcast in left outer join when there are many empty partitions on outer/left side`</a> - by Last-remote11</li>
+<li><a href="https://github.com/apache/spark/pull/52392">#52392: [SPARK-53641][DOCS] Add PARTITION BY support in Arrow Python UDTF docs</a> - by allisonwang-db</li>
+<li><a href="https://github.com/apache/spark/pull/52295">#52295: [SPARK-53429][PYTHON] Support Direct Passthrough Partitioning in the PySpark Dataframe API</a> - by shujingyang-db</li>
+</ol>
+<hr>
+<h2>New Issues Reported that are open</h2>
+<ol>
+<li><a href="https://github.com/apache/spark/issues/52395">#52395: [SPARK-53553][CONNECT][4.0] Fix handling of null values in LiteralValueProtoConverter</a> - created 2025-09-19T12:37:24Z by heyihong</li>
+<li><a href="https://github.com/apache/spark/issues/52394">#52394: [MINOR][TESTS] Fix the intention of &#x27;read parquet footers in parallel&#x27; test</a> - created 2025-09-19T09:31:56Z by yaooqinn</li>
+<li><a href="https://github.com/apache/spark/issues/52393">#52393: [SPARK-53645][PS] Implement `skipna` parameter for ps.DataFrame `any()`</a> - created 2025-09-19T05:33:31Z by petern48</li>
+<li><a href="https://github.com/apache/spark/issues/52392">#52392: [SPARK-53641][DOCS] Add PARTITION BY support in Arrow Python UDTF docs</a> - created 2025-09-18T21:36:59Z by allisonwang-db</li>
+<li><a href="https://github.com/apache/spark/issues/52391">#52391: [SPARK-53638] Limit the byte size of arrow batch for TWS to avoid OOM</a> - created 2025-09-18T17:55:26Z by zeruibao</li>
+<li><a href="https://github.com/apache/spark/issues/52388">#52388: [SPARK-39328][SQL][TESTS] Fix flaky test `SPARK-37753: Inhibit broadcast in left outer join when there are many empty partitions on outer/left side`</a> - created 2025-09-18T14:16:30Z by Last-remote11</li>
+<li><a href="https://github.com/apache/spark/issues/52386">#52386: [SPARK-53636][CORE] Fix thread-safety issue in SortShuffleManager.unregisterShuffle</a> - created 2025-09-18T13:19:19Z by Ngone51</li>
+<li><a href="https://github.com/apache/spark/issues/52385">#52385: [SPARK-53598][SQL][3.5] Check the existence of numParts before reading large table property</a> - created 2025-09-18T10:06:42Z by pan3793</li>
+<li><a href="https://github.com/apache/spark/issues/52384">#52384: [SPARK-53633][SQL] Reuse InputStream in vectorized Parquet reader</a> - created 2025-09-18T08:31:17Z by pan3793</li>
+<li><a href="https://github.com/apache/spark/issues/52382">#52382: [SPARK-53631][CORE][SHS] Optimize memory and perf on SHS bootstrap</a> - created 2025-09-18T07:08:13Z by pan3793</li>
+<li><a href="https://github.com/apache/spark/issues/52378">#52378: [SPARK-51426][PYTHON][SQL] Fix &#x27;Setting metadata to empty dict does not work&#x27;</a> - created 2025-09-18T02:32:37Z by petern48</li>
+<li><a href="https://github.com/apache/spark/issues/52377">#52377: [SPARK-53629][SQL] Implement type widening for MERGE INTO WITH SCHEMA EVOLUTION</a> - created 2025-09-18T01:01:37Z by szehon-ho</li>
+<li><a href="https://github.com/apache/spark/issues/52373">#52373: [SPARK-53622][CORE][TEST] Improve `UninterruptibleThreadSuite`</a> - created 2025-09-17T19:51:06Z by vrozov</li>
+<li><a href="https://github.com/apache/spark/issues/52371">#52371: [WIP][SPARK-53621][CORE] Adding Support for Executing CONTINUE HANDLER</a> - created 2025-09-17T17:00:22Z by TeodorDjelic</li>
+<li><a href="https://github.com/apache/spark/issues/52370">#52370: [WIP] Transition PySpark default to bytes instead of bytesarray</a> - created 2025-09-17T15:35:44Z by craiuconstantintiberiu</li>
+<li><a href="https://github.com/apache/spark/issues/52369">#52369: [SPARK-47110][INFRA] Reenble AmmoniteTest tests in Maven builds</a> - created 2025-09-17T14:44:21Z by sarutak</li>
+<li><a href="https://github.com/apache/spark/issues/52352">#52352: [SPARK-53596][SQL] Put translatable filters to the left side of untranslatable filters</a> - created 2025-09-16T08:06:47Z by joeyutong</li>
+<li><a href="https://github.com/apache/spark/issues/52349">#52349: [DOCS][SQL] Cross-link CSV data source docs to generic options &amp; JSON</a> - created 2025-09-16T03:28:20Z by Username46786</li>
+<li><a href="https://github.com/apache/spark/issues/52348">#52348: [SPARK-53591][SDP] Simplify Pipeline Spec Pattern Glob Matching</a> - created 2025-09-15T22:51:52Z by JiaqiWang18</li>
+<li><a href="https://github.com/apache/spark/issues/52347">#52347: [SPARK-53482][SQL] MERGE INTO support for when source has less nested field than target</a> - created 2025-09-15T21:39:39Z by szehon-ho</li>
+<li><a href="https://github.com/apache/spark/issues/52336">#52336: [SPARK-53575][CORE] Retry entire consumer stages when checksum mismatch detected for a retried shuffle map task</a> - created 2025-09-15T08:07:12Z by ivoson</li>
+<li><a href="https://github.com/apache/spark/issues/52335">#52335: [SPARK-53564][CORE] Avoid DAGScheduler exits due to blockManager RPC timeout in DAGSchedulerEventProcessLoop </a> - created 2025-09-15T07:46:56Z by ivoson</li>
+<li><a href="https://github.com/apache/spark/issues/52334">#52334: [SPARK-53573][WIP][SQL] Use Pre-processor for generalized parameter marker handling</a> - created 2025-09-13T20:42:50Z by srielau</li>
+<li><a href="https://github.com/apache/spark/issues/52328">#52328: [SPARK-53593][SDP] Add response field for DefineDataset and DefineFlow RPC</a> - created 2025-09-12T20:25:42Z by cookiedough77</li>
+<li><a href="https://github.com/apache/spark/issues/52323">#52323: [SPARK-53592][PYTHON] Make `@udf` support vectorized UDF</a> - created 2025-09-12T08:08:00Z by zhengruifeng</li>
+</ol>
+<hr>
+</body>
+</html>
